@@ -1,0 +1,43 @@
+{
+  "name": "@affinity/api",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "npx eslint ./src",
+    "schema:generate": "openapi-typescript ./openapi.yaml --output ./schema.d.ts"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./client": {
+      "import": "./src/client/index.ts",
+      "types": "./src/client/index.ts"
+    },
+    "./http": {
+      "import": "./src/http/index.ts",
+      "types": "./src/http/index.ts"
+    },
+    "./vue": {
+      "import": "./src/vue/index.ts",
+      "types": "./src/vue/index.ts"
+    }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-vue": "^9.18.1",
+    "openapi-typescript": "^6.7.1",
+    "prettier": "^3.1.0",
+    "typescript": "~5.2",
+    "vue": "^3.3.7"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  }
+}

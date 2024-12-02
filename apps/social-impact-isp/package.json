@@ -1,0 +1,65 @@
+{
+  "name": "social-impact-isp",
+  "version": "1.0.0",
+  "description": "A frontend for Social Impact ISP",
+  "private": true,
+  "author": "Jono Hoskin",
+  "keywords": [
+    "social-impact-isp"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:development": "npm run build -- --mode=development",
+    "build:production": "npm run build -- --mode=production",
+    "build:sandbox": "npm run build -- --mode=sandbox",
+    "preview": "vite preview",
+    "dev": "npm run build:development",
+    "prod": "npm run build:production",
+    "watch": "vite",
+    "lint": "eslint --ext .js,.ts,.vue ./src",
+    "format": "prettier src --write"
+  },
+  "dependencies": {
+    "@affinity/api": "*",
+    "@affinity/common": "*",
+    "@affinity/ui": "*",
+    "@auth0/auth0-spa-js": "^2.1.3",
+    "@sentry/rrweb": "^0.3.3",
+    "@sentry/vue": "^7.63.0",
+    "axios": "^1.4.0",
+    "date-fns": "^2.16.1",
+    "rrweb": "^1.1.3",
+    "tailwindcss": "^3.3.5",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/compiler-sfc": "^3.3.8",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.2",
+    "eslint": "^8.47.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.17.0",
+    "postcss": "^8.4.39",
+    "postcss-import": "^15.1.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.1.6",
+    "vite": "^4.5.3",
+    "vite-tsconfig-paths": "^4.2.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "volta": {
+    "node": "20.2.0"
+  },
+  "engines": {
+    "node": "^20.0.0"
+  }
+}

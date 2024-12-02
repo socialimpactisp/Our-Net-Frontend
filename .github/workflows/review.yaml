@@ -1,0 +1,22 @@
+name: Review Pull Request
+
+on:
+  pull_request: ~
+
+jobs:
+  # Ensure the build finishes successfully after any changes.
+  review:
+    name: Review
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: ./.github/actions/node
+
+      - name: Build
+        run: npm run build:development
+
+      - name: Lint
+        run: npm run lint

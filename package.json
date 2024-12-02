@@ -1,0 +1,28 @@
+{
+  "name": "affinity",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "./apps/*",
+    "./packages/*"
+  ],
+  "bin": {
+    "workspace-path": "./bin/workspace-path.js"
+  },
+  "scripts": {
+    "lint": "npm --workspaces --if-present run lint",
+    "format": "npm --workspaces --if-present run format",
+    "build:development": "npm --workspaces --if-present run build:development",
+    "build:sandbox": "npm --workspaces --if-present run build:sandbox",
+    "build:production": "npm --workspaces --if-present run build:production",
+    "build:storybook": "npm -w @affinity/ui run build-storybook",
+    "reset": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+    "storybook": "npm -w @affinity/ui run storybook"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "overrides": {
+    "typescript": "~5.2"
+  }
+}

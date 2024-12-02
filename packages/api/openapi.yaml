@@ -1,0 +1,206 @@
+openapi: 3.0.1
+info:
+  title: Affinity
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://affinity-backend.{Environment}.devolicloud.com/api
+    variables:
+      Environment:
+        enum:
+          - prod
+          - sandbox
+        default: sandbox
+security: []
+paths:
+  /products:
+    get:
+      operationId: getProducts
+      summary: Retrieve a list of products
+      responses:
+        200:
+          description: Retrieve a list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the product.
+        object:
+          type: string
+          description: The type of object. In this case, "product."
+        active:
+          type: boolean
+          description: Whether the product is active or not.
+        attributes:
+          type: array
+          items: {}
+          description: An array of attributes associated with the product.
+        created:
+          type: integer
+          description: Time at which the product was created in seconds since the epoch.
+        default_price:
+          $ref: "#/components/schemas/Price"
+          description: The default price associated with the product.
+        description:
+          type: string
+          description: A description of the product.
+        features:
+          type: array
+          items: {}
+          description: An array of features associated with the product.
+        images:
+          type: array
+          items:
+            type: string
+          description: An array of image URLs associated with the product.
+        livemode:
+          type: boolean
+          description: Indicates whether the product is in live mode.
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: A set of key-value pairs that you can attach to the product.
+        name:
+          type: string
+          description: The name of the product.
+        package_dimensions:
+          type: object
+          description: The dimensions of the product's package.
+        shippable:
+          type: boolean
+          description: Indicates whether the product is shippable.
+        statement_descriptor:
+          type: string
+          description: Extra information about a product that will appear on your customer's credit card statement.
+        tax_code:
+          type: string
+          description: A string representing the product's tax code.
+        type:
+          type: string
+          description: The type of the product. E.g., "service."
+        unit_label:
+          type: string
+          description: A label that represents units of this product in Stripe.
+        updated:
+          type: integer
+          description: Time at which the product was last updated in seconds since the epoch.
+        url:
+          type: string
+          description: A URL of a webpage with more information about the product.
+      required:
+        - id
+        - object
+        - active
+        - created
+        - livemode
+        - name
+        - type
+        - updated
+    Price:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the price.
+        object:
+          type: string
+          description: The type of object. In this case, "price."
+        active:
+          type: boolean
+          description: Whether the price is active or not.
+        billing_scheme:
+          type: string
+          description: The billing scheme for this price.
+        created:
+          type: integer
+          description: Time at which the price was created in seconds since the epoch.
+        currency:
+          type: string
+          description: Three-letter ISO currency code.
+        custom_unit_amount:
+          type: integer
+          description: The unit amount in the currency for this price.
+        livemode:
+          type: boolean
+          description: Indicates whether the price is in live mode.
+        lookup_key:
+          type: string
+          description: A lookup key used to retrieve prices dynamically.
+        metadata:
+          type: object
+          additionalProperties: {}
+          description: A set of key-value pairs that you can attach to the price.
+        nickname:
+          type: string
+          description: A brief description of this price.
+        product:
+          type: string
+          description: The ID of the product that this price belongs to.
+        recurring:
+          $ref: "#/components/schemas/Recurring"
+          description: The recurring components of a price.
+        tax_behavior:
+          type: string
+          description: Describes how tax is applied to this price.
+        tiers_mode:
+          type: string
+          description: The pricing tier strategy used for this price.
+        transform_quantity:
+          type: string
+          description: If present, controls whether the quantity field is required.
+        type:
+          type: string
+          description: The type of the price, one of "recurring," "one_time," or "usage."
+        unit_amount:
+          type: integer
+          description: The unit amount in cents or the equivalent in the currency for this price.
+        unit_amount_decimal:
+          type: string
+          description: The unit amount in decimal form for this price.
+      required:
+        - id
+        - object
+        - active
+        - billing_scheme
+        - created
+        - currency
+        - livemode
+        - product
+        - recurring
+        - tax_behavior
+        - type
+        - unit_amount
+        - unit_amount_decimal
+    Recurring:
+      type: object
+      properties:
+        aggregate_usage:
+          type: string
+          description: Specifies usage aggregation strategy for usage-based prices.
+        interval:
+          type: string
+          description: The frequency at which a subscription is billed.
+        interval_count:
+          type: integer
+          description: The number of intervals between subscription billings.
+        trial_period_days:
+          type: integer
+          description: Number of trial period days granted when subscribing a customer to this price.
+        usage_type:
+          type: string
+          description: The usage type for this price.
+      required:
+        - interval
+        - interval_count
+        - usage_type

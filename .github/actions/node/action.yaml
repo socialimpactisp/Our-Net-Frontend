@@ -1,0 +1,17 @@
+name: "Node"
+description: "Sets up node with consistent version across project and installs dependencies"
+inputs:
+  nodeVersion:
+    description: "The version of node to use"
+    type: number
+    default: 20
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js ${{ inputs.nodeVersion }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.nodeVersion }}
+    - name: Install dependencies
+      shell: bash
+      run: npm ci --no-audit

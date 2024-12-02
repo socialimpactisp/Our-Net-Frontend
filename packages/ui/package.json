@@ -1,0 +1,62 @@
+{
+  "name": "@affinity/ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./tailwind": {
+      "default": "./theme.preset.js"
+    },
+    "./layout": {
+      "import": "./src/layout/index.ts",
+      "types": "./src/layout/index.ts"
+    },
+    "./affinity": {
+      "import": "./src/affinity/index.ts",
+      "types": "./src/affinity/index.ts"
+    }
+  },
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue src",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@affinity/common": "*",
+    "vue": "^3.3.7"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.4.1",
+    "@storybook/addon-interactions": "^7.4.1",
+    "@storybook/addon-links": "^7.4.1",
+    "@storybook/addon-styling": "^1.3.7",
+    "@storybook/blocks": "^7.5.3",
+    "@storybook/builder-vite": "^7.4.1",
+    "@storybook/testing-library": "^0.2.2",
+    "@storybook/vue3": "^7.4.1",
+    "@storybook/vue3-vite": "^7.4.1",
+    "@typescript-eslint/parser": "^6.7.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.19",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-storybook": "^0.6.15",
+    "postcss": "^8.4.39",
+    "prettier": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.4.1",
+    "tailwindcss": "^3.3.5",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.0.2",
+    "vite": "^4.5.3",
+    "vite-tsconfig-paths": "^4.2.1",
+    "vue-eslint-parser": "^9.3.1",
+    "vue-tsc": "^1.8.22"
+  }
+}
