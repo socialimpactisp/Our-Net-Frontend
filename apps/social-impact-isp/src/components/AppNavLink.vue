@@ -20,10 +20,10 @@ export default defineComponent({
 
   computed: {
     rootClasses(): string {
-      return "text-base font-medium hover:text-gray-300 focus:outline-none transition duration-150 ease-in-out select-none";
+      return "text-[13px] font-sans font-semibold tracking-wide hover:text-brand-red focus:outline-none transition-colors duration-200 select-none";
     },
     activeClasses(): string {
-      return this.active ? "text-gray-600" : "text-gray-400";
+      return this.active ? "text-brand-red" : "text-brand-dark";
     },
   },
 });

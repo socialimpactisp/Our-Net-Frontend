@@ -1,8 +1,8 @@
 <template>
-  <ui-banner> Social Impact ISP - Customer Care Policy </ui-banner>
+  <ui-banner> OurNet - Customer Care Policy </ui-banner>
   <page-container>
     <customer-care
-      isp-name="Social Impact ISP"
+      isp-name="OurNet"
       support-phone="09 883 0018"
       support-phone-e164="+6498830018"
       support-email="support@ournet.com"

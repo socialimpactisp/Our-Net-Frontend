@@ -19,8 +19,8 @@
         </template>
         <template v-else>
           <offer-summary-table
-            isp-name="Social Impact ISP"
-            parent-company="Social Impact ISP Ltd (a subsidiary of Devoli Ltd)"
+            isp-name="OurNet"
+            parent-company="OurNet Ltd (a subsidiary of Devoli Ltd)"
             :plans="plans"
           />
         </template>

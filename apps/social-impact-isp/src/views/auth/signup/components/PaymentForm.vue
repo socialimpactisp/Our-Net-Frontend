@@ -96,7 +96,7 @@
     </div>
     <div class="mt-4 text-center">
       <p class="font-bold text-sm text-gray-500">
-        Social Impact ISP payments are secured by
+        OurNet payments are secured by
         <a
           class="underline"
           href="https://stripe.com"

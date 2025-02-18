@@ -1,53 +1,60 @@
 <template>
-  <div>
-    <div class="relative bg-brand">
+  <div class="bg-white">
+    <div class="relative bg-white">
       <div class="w-full flex flex-col">
-        <div class="block max-w-screen-2xl w-full mx-auto pt-12 sm:pt-20 pb-12">
-          <div class="lg:w-1/2 pl-6 pr-12">
-            <div class="max-w">
-              <h1
-                id="hero-heading"
-                class="text-3xl xl:text-4xl tracking-tight font-display font-bold text-white"
+        <div
+          class="block max-w-screen-2xl w-full mx-auto pt-12 sm:pt-20 pb-12 px-4"
+        >
+          <div class="lg:w-3/4 mx-auto text-center">
+            <div class="space-y-8">
+              <div
+                class="inline-block px-4 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/20"
               >
-                Ultimate Fibre Speeds
-              </h1>
-              <h1
-                id="hero-heading"
-                class="text-3xl xl:text-4xl tracking-tight font-display font-bold text-white"
+                <p
+                  class="text-brand-red text-[13px] font-sans font-medium tracking-wide"
+                >
+                  Exclusive Staff & Friends Offer
+                </p>
+              </div>
+              <div class="space-y-4">
+                <h1
+                  class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-brand-dark leading-tight tracking-tight"
+                >
+                  Lightning Fast Internet
+                  <span class="block text-brand-red">Without Limits</span>
+                </h1>
+                <p class="text-brand-mid text-xl max-w-2xl mx-auto font-sans">
+                  Experience unlimited data with ultimate fiber speeds. No
+                  contracts, just pure performance.
+                </p>
+              </div>
+              <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
               >
-                Unlimited Data
-              </h1>
-              <h1
-                id="hero-heading"
-                class="text-3xl xl:text-4xl tracking-tight font-display font-bold text-white"
-              >
-                No Contract
-              </h1>
-              <h1
-                id="hero-heading"
-                class="text-3xl xl:text-4xl tracking-tight font-display font-bold text-white"
-              >
-                Exclusive pricing for Staff & Friends
-              </h1>
-              <p
-                id="hero-copy"
-                class="mt-6 text-lg md:text-2xl font-display font-normal italic text-white"
-              >
-                Sign up to start configuring your perfect plan
-              </p>
+                <button
+                  class="px-8 py-3.5 bg-brand-red text-white rounded-lg font-sans text-[13px] tracking-wide font-medium hover:bg-brand-red/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-200"
+                >
+                  Get Started
+                </button>
+                <button
+                  class="px-8 py-3.5 bg-brand-dark/5 text-brand-dark rounded-lg font-sans text-[13px] tracking-wide font-medium hover:bg-brand-dark/10 transition-all border border-brand-dark/10"
+                >
+                  View Plans
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         <div
           v-if="hasAccessCode || hasAccessCodeSelected"
-          class="bg-brand py-8 sm:py-12 bg-london-map"
+          class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
         >
-          <div class="max-w-screen-2xl mx-auto">
+          <div class="max-w-screen-2xl mx-auto relative">
             <div class="lg:w-1/2 pl-6 pr-6 sm:pr-12">
               <div class="max-w-xl">
                 <h3
-                  class="text-white text-xl sm:text-3xl flex items-start sm:items-center font-base tracking-tight"
+                  class="text-brand-dark text-xl sm:text-2xl flex items-start sm:items-center font-display tracking-tight"
                 />
                 <div class="mt-6 flex items-center">
                   <address-search @selected="selectAddress" />
@@ -56,12 +63,18 @@
             </div>
           </div>
         </div>
-        <div v-else class="bg-brand py-8 sm:py-12 bg-keys-white">
-          <div class="max-w-screen-2xl mx-auto">
-            <div class="lg:w-1/2 pl-6 pr-6 sm:pr-12">
-              <div class="max-w-xl">
+        <div
+          v-else
+          class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
+        >
+          <div class="max-w-screen-2xl mx-auto relative">
+            <div class="lg:w-1/2 mx-auto px-6">
+              <div class="max-w-xl mx-auto">
                 <div class="flex items-center">
-                  <access-code-input @access-code="accessCodeEntered" />
+                  <access-code-input
+                    @access-code="accessCodeEntered"
+                    class="w-full"
+                  />
                 </div>
               </div>
             </div>
@@ -70,35 +83,39 @@
       </div>
     </div>
 
-    <div class="bg-brand py-6 sm:py-12">
-      <div class="max-w-screen-2xl mx-auto px-6">
-        <h2
-          class="text-5xl sm:text-6xl text-white font-display text-center tracking-tight"
-        >
-          Unlimited Internet
-        </h2>
+    <div
+      class="bg-white py-12 sm:py-20 relative overflow-hidden border-t border-brand-light/20"
+    >
+      <div class="max-w-screen-2xl mx-auto px-6 relative">
+        <div class="text-center space-y-4">
+          <span
+            class="inline-block px-4 py-1.5 rounded-full bg-brand-red/10 text-brand-red text-[13px] font-sans font-medium tracking-wide"
+            >Choose Your Plan</span
+          >
+          <h2
+            class="text-4xl sm:text-5xl text-brand-dark font-display font-bold tracking-tight"
+          >
+            Unlimited Internet Plans
+          </h2>
+          <p class="text-brand-mid text-lg max-w-2xl mx-auto font-sans">
+            Exclusive pricing for Staff & Friends with no hidden fees or
+            contracts
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="bg-brand py-6 sm:py-12">
-      <div class="max-w-screen-2xl mx-auto px-6">
-        <h2
-          class="text-5xl sm:text-6xl text-white font-display text-center tracking-tight"
-        >
-          Our Plans for Staff & Friends
-        </h2>
-      </div>
-    </div>
-
-    <div class="relative bg-white py-12">
+    <div class="relative bg-white py-16 border-t border-brand-light/20">
       <div class="relative z-10 max-w-screen-2xl mx-auto">
         <div class="relative">
           <div
-            class="max-w-screen-lg mx-auto overflow-x-scroll sm:overflow-x-visible flex sm:grid sm:grid-cols-4 gap-4 px-4"
+            class="max-w-screen-xl mx-auto overflow-x-scroll sm:overflow-x-visible flex sm:grid sm:grid-cols-4 gap-6 px-4"
             style="-webkit-overflow-scrolling: touch"
           >
             <template v-if="products === null">
-              <loading-spinner />
+              <div class="w-full flex items-center justify-center py-12">
+                <loading-spinner />
+              </div>
             </template>
             <template v-else-if="products.plans.length > 0">
               <template v-for="(product, index) in products.plans" :key="index">
@@ -116,19 +133,20 @@
               </template>
             </template>
             <template v-else>
-              <p>No products are avalable</p>
+              <div class="col-span-4 text-center py-12">
+                <p class="text-brand-mid text-lg">
+                  No products are available at the moment
+                </p>
+              </div>
             </template>
-            <div class="block sm:hidden pr-2 sm:pr-0" />
           </div>
         </div>
         <div
-          class="mt-6 flex sm:hidden items-center justify-center border-t-2 relative mx-6"
+          class="mt-6 flex sm:hidden items-center justify-center relative mx-6"
         >
-          <span
-            class="block bg-white absolute p-2 uppercase text-xs font-medium tracking-wide"
-          >
-            Scroll
-          </span>
+          <div class="w-32 h-1 bg-brand-light/30 rounded-full">
+            <div class="w-1/3 h-full bg-brand-red rounded-full"></div>
+          </div>
         </div>
       </div>
     </div>

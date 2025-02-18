@@ -7,8 +7,8 @@
             Thank you for connecting
           </h1>
           <p class="mt-4 text-xl font-medium text-gray-200">
-            Thank you for choosing the Social Impact ISP as your broadband
-            provider - your payment has been received.
+            Thank you for choosing OurNet as your broadband provider - your
+            payment has been received.
           </p>
         </div>
       </div>
@@ -18,7 +18,7 @@
       <div class="max-w-screen-2xl mx-auto px-6">
         <div class="max-w-xl mx-auto text-gray-800 text-lg">
           <p class="mb-2">Cheers</p>
-          <p class="font-semibold">The Social Impact ISP team</p>
+          <p class="font-semibold">The OurNet team</p>
 
           <div class="mt-8 flex items-center space-x-4">
             <ui-button tag="router-link" to="/" rounded theme="dark">

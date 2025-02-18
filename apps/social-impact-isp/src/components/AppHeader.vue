@@ -1,10 +1,15 @@
 <template>
-  <header class="relative sm:sticky sm:top-0 sm:z-20 bg-brand w-full mx-auto">
+  <header
+    class="relative sm:sticky sm:top-0 sm:z-20 bg-gray-100 w-full mx-auto border-b border-brand-light/20"
+  >
     <div class="max-w-screen-2xl w-full mx-auto px-4 sm:px-6">
-      <div class="flex items-center py-4 md:space-x-10 h-28 sm:h-30">
+      <div class="flex items-center py-4 md:space-x-10 h-20">
         <div class="inline-flex items-center">
-          <router-link to="/" class="inline-flex h-20">
-            <app-logo-dark />
+          <router-link
+            to="/"
+            class="text-xl font-display font-bold text-brand-dark hover:text-brand-red transition-colors"
+          >
+            OurNet
           </router-link>
         </div>
         <!-- <div class="flex-1 h-6">
@@ -19,67 +24,72 @@
           <template v-if="isLoading">
             <loading-spinner
               classes="flex items-center justify-center"
-              width="w-8"
-              height="h-8"
+              width="w-6"
+              height="h-6"
             />
           </template>
           <template v-else>
             <template v-if="isAuthenticated">
               <ui-dropdown>
                 <template #trigger>
-                  <ui-button tag="span" outline rounded has-icon>
-                    <icon-user-circle
-                      class="h-6 mr-3 hover:text-white focus:text-white text-white"
-                    />
+                  <ui-button
+                    tag="span"
+                    class="px-4 py-2 text-[13px] font-sans tracking-wide text-brand-dark hover:bg-brand-dark/5 rounded-lg border border-brand-dark/10 inline-flex items-center"
+                  >
+                    <icon-user-circle class="h-5 w-5 mr-2 text-brand-dark" />
                     My Account
                   </ui-button>
                 </template>
 
                 <span
-                  class="block w-full px-4 py-2 text-sm font-medium leading-5 text-left transition text-gray-400 overflow-hidden"
+                  class="block w-full px-4 py-2 text-[13px] font-sans text-brand-mid"
                 >
-                  {{ user.name }}
+                  {{ user?.name }}
                 </span>
 
-                <div class="border-t border-gray-100 my-1" />
+                <div class="border-t border-brand-light/20 my-1" />
 
                 <ui-dropdown-link
                   tag="span"
-                  @click="$router.push(`/account/${user.nickname}`)"
+                  class="text-[13px] font-sans tracking-wide text-brand-dark hover:bg-brand-dark/5"
+                  @click="$router.push(`/account/${user?.nickname}`)"
                 >
                   My Account
                 </ui-dropdown-link>
 
-                <div class="border-t border-white my-1" />
+                <div class="border-t border-brand-light/20 my-1" />
 
-                <ui-dropdown-link @click="logout"> Logout </ui-dropdown-link>
+                <ui-dropdown-link
+                  class="text-[13px] font-sans tracking-wide text-brand-red hover:bg-brand-red/5"
+                  @click="logout"
+                >
+                  Logout
+                </ui-dropdown-link>
               </ui-dropdown>
             </template>
             <template v-else>
               <ui-button
-                class="sm:inline-flex"
+                class="!bg-brand-red !text-white hover:!bg-brand-red/90 rounded-lg border !border-transparent shadow-sm transition-colors px-4 py-2 text-[13px] font-sans tracking-wide"
                 tag="span"
                 to="/login"
-                outline
-                rounded
                 @click="login"
               >
                 Login
               </ui-button>
             </template>
 
-            <div
-              class="inline-flex text-white sm:hidden h-6 w-6 cursor-pointer"
+            <button
+              class="inline-flex items-center justify-center h-10 w-10 text-brand-dark hover:bg-brand-dark/5 rounded-lg border border-brand-dark/10 sm:hidden"
               @click="menuOpen = !menuOpen"
             >
-              <icon-menu />
-            </div>
+              <icon-menu class="h-5 w-5" />
+            </button>
           </template>
         </div>
       </div>
       <div
         v-if="menuOpen"
-        class="absolute inset-x-0 block sm:hidden z-50 bg-white py-6 border-t"
+        class="absolute inset-x-0 block sm:hidden z-50 bg-white py-6 border-t border-brand-light/20"
         style="top: 100%"
       >
         <app-nav @click="menuOpen = false" />
@@ -91,10 +101,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import AppLogoDark from "./AppLogoDark.vue";
 import AppNav from "./AppNav.vue";
 import LoadingSpinner from "./LoadingSpinner.vue";
-
 import IconMenu from "@/components/icons/Menu.vue";
 import UiButton from "@/components/ui/Button.vue";
 import UiDropdown from "@/components/ui/Dropdown.vue";
@@ -105,7 +113,6 @@ export default defineComponent({
   name: "AppHeader",
 
   components: {
-    AppLogoDark,
     AppNav,
     LoadingSpinner,
     IconMenu,
