@@ -9,6 +9,14 @@ export default {
   safelist: productImages.map((image) => `bg-${image}`),
   theme: {
     extend: {
+      colors: {
+        brand: {
+          red: '#ee3124',
+          dark: '#58595b',
+          mid: '#939598',
+          light: '#c7c8ca',
+        }
+      },
       boxShadow: {
         outline: "0 0 0 3px rgba(180, 214, 228, 0.8)",
       },
@@ -17,10 +25,8 @@ export default {
         {},
       ),
       fontFamily: {
-        display: [
-          '"mrs-eaves-xl-serif-narrow"',
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        display: ["Montserrat", ...defaultTheme.fontFamily.sans],
         body: ['"etna-condensed"', ...defaultTheme.fontFamily.sans],
         numeric: ['"etna-xx-condensed"'],
       },

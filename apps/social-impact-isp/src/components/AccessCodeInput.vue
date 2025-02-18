@@ -6,7 +6,7 @@
       type="accessCode"
       name="accessCode"
       :placeholder="placeholder"
-      class="block w-full appearance-none pl-6 pr-16 py-4 text-lg font-display font-extrabold italic bg-white border border-black placeholder-gray-500 text-gray-900 leading-5 focus:ring-gray-200 focus:outline-none focus:shadow-outline rounded-full transition duration-200 ease-in-out"
+      class="block w-full appearance-none px-6 py-3.5 text-sm font-sans bg-white border border-brand-light/30 placeholder-brand-mid text-brand-dark leading-relaxed focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red focus:outline-none rounded-lg transition duration-200 ease-in-out"
       autocomplete="off"
       :autofocus="autoFocus"
       @input="onInput"
@@ -14,10 +14,10 @@
     <button
       v-if="codeIsValid"
       type="button"
-      class="block z-10 absolute right-10 mr-6 h-6 w-6 text-gray-600 cursor-pointer"
+      class="absolute right-2 px-4 py-2 mr-2 text-xs font-semibold uppercase tracking-wider text-brand-red hover:bg-brand-red/10 rounded-md transition-colors"
       @click="addAccessCode"
     >
-      UNLOCK
+      Unlock
     </button>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default defineComponent({
   props: {
     placeholder: {
       type: String,
-      default: "Enter your code to unlock your Social Impact ISP",
+      default: "Enter your access code",
     },
     autoFocus: Boolean,
   },
