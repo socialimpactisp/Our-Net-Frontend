@@ -1,6 +1,15 @@
-# Social Impact ISP Platform
+# OurNet ESP Platform
 
-A modern ISP customer portal built with Vue 3, TypeScript, and Tailwind CSS. This project uses GitHub Workspaces to manage multiple packages and applications.
+A modern Education Service Provider (ESP) and ISP customer portal built with Vue 3, TypeScript, and Tailwind CSS. This platform supports OurNet's mission to bridge the digital divide by providing both connectivity and educational opportunities to Māori communities.
+
+## About OurNet
+
+OurNet is pioneering the transition from a traditional Internet Service Provider (ISP) to an Education Service Provider (ESP), offering "education-led connectivity" that empowers whānau with the tools, skills, and knowledge to thrive in the digital world. Our platform integrates:
+
+- Reliable internet connectivity
+- Culturally aligned education programmes
+- Digital literacy initiatives
+- Community empowerment tools
 
 ## Project Structure
 
@@ -9,7 +18,7 @@ This project is organized using GitHub Workspaces with the following structure:
 ```
 .
 ├── apps/
-│   └── social-impact-isp/    # Main customer portal application
+│   └── ournet-portal/        # Main customer and education portal
 ├── packages/
 │   ├── api/                  # API client package
 │   └── ui/                   # Shared UI component library
@@ -29,8 +38,8 @@ This project is organized using GitHub Workspaces with the following structure:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-org/social-impact-isp.git
-cd social-impact-isp
+git clone https://github.com/Divoli/ournet-website.git
+cd ournet-website
 ```
 
 2. Install dependencies for all workspaces:
@@ -43,7 +52,7 @@ npm install
 
 ```bash
 # Create your local environment file
-cp apps/social-impact-isp/.env.example apps/social-impact-isp/.env.local
+cp apps/ournet-portal/.env.example apps/ournet-portal/.env.local
 ```
 
 The `.env.local` file will contain these essential variables:
@@ -53,7 +62,7 @@ VITE_API_URL=http://localhost:3000
 VITE_AUTH0_DOMAIN=your-auth0-domain
 VITE_AUTH0_CLIENT_ID=your-auth0-client-id
 VITE_STRIPE_KEY=your-stripe-public-key
-VITE_APPLICATION_IDENTIFIER=iso
+VITE_APPLICATION_IDENTIFIER=ournet
 VITE_PUBLIC_DSN=your-sentry-dsn  # Optional, for error tracking
 ```
 
@@ -61,7 +70,7 @@ For sandbox environment testing:
 
 ```bash
 # Create sandbox environment file when needed
-cp apps/social-impact-isp/.env.sandbox apps/social-impact-isp/.env.sandbox.local
+cp apps/ournet-portal/.env.sandbox apps/ournet-portal/.env.sandbox.local
 ```
 
 4. Configure Auth0:
@@ -73,53 +82,30 @@ cp apps/social-impact-isp/.env.sandbox apps/social-impact-isp/.env.sandbox.local
 5. Start the development server:
 
 ```bash
-npm -w social-impact-isp run dev
+npm run dev
 ```
 
 ## Available Scripts
 
-### Working with All Workspaces
-
-Run a command across all workspaces:
+Run commands directly from the project root:
 
 ```bash
-npm --workspaces run <command>
-```
-
-Example:
-
-```bash
-npm --workspaces run build
-```
-
-### Main Application Scripts
-
-```bash
-# Start the development server
-npm -w social-impact-isp run dev
+npm run dev
 
 # Build for different environments
-npm -w social-impact-isp run build            # Default build
-npm -w social-impact-isp run build:development
-npm -w social-impact-isp run build:production
-npm -w social-impact-isp run build:sandbox
+npm run build            # Default build
+npm run build:development
+npm run build:production
+npm run build:sandbox
 
 # Preview the production build
-npm -w social-impact-isp run preview
+npm run preview
 
 # Code quality and type checking
-npm -w social-impact-isp run lint        # Run ESLint
-npm -w social-impact-isp run lint:fix    # Fix ESLint issues
-npm -w social-impact-isp run format      # Format code with Prettier
-npm -w social-impact-isp run type-check  # Run TypeScript type checking
-```
-
-### Development Tools
-
-We use Storybook for UI component development and documentation:
-
-```bash
-npm -w @affinity/ui run storybook
+npm run lint        # Run ESLint
+npm run lint:fix    # Fix ESLint issues
+npm run format      # Format code with Prettier
+npm run type-check  # Run TypeScript type checking
 ```
 
 ## Environment Configuration
@@ -136,21 +122,21 @@ Development workflow:
 
    ```bash
    # Start the development server with local configuration
-   npm -w social-impact-isp run dev
+   npm run dev
    ```
 
 2. Sandbox Testing:
 
    ```bash
    # Start the development server with sandbox configuration
-   npm -w social-impact-isp run dev -- --mode sandbox
+   npm run dev -- --mode sandbox
    ```
 
 3. Production Build:
 
    ```bash
    # Build for production
-   npm -w social-impact-isp run build:production
+   npm run build:production
    ```
 
 ## Type Safety
@@ -165,6 +151,8 @@ The application uses TypeScript for type safety. Key type definitions can be fou
 1. Create a new branch for your feature
 2. Make your changes
 3. Submit a pull request
+
+Please ensure your contributions align with OurNet's mission of empowering Māori communities through education-led connectivity.
 
 ## Troubleshooting
 
@@ -184,5 +172,3 @@ Common issues:
    - Check API is running and accessible
 
 ## License
-
-[Your License Information Here]
