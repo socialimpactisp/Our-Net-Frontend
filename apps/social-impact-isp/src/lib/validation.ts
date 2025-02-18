@@ -1,5 +1,3 @@
-import { ref, Ref } from "vue";
-
 export interface ValidationRule {
   test: (value: unknown) => boolean;
   message: string;

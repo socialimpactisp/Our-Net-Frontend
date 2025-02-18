@@ -42,17 +42,26 @@ npm install
 3. Set up environment variables:
 
 ```bash
-cp apps/social-impact-isp/.env.sandbox apps/social-impact-isp/.env.local
+# Create your local environment file
+cp apps/social-impact-isp/.env.example apps/social-impact-isp/.env.local
 ```
 
-Required environment variables:
+The `.env.local` file will contain these essential variables:
 
 ```
+VITE_API_URL=http://localhost:3000
 VITE_AUTH0_DOMAIN=your-auth0-domain
 VITE_AUTH0_CLIENT_ID=your-auth0-client-id
-VITE_AUTH0_AUDIENCE=your-auth0-api-audience
-VITE_API_URL=your-api-url
-VITE_STRIPE_PUBLIC_KEY=your-stripe-public-key
+VITE_STRIPE_KEY=your-stripe-public-key
+VITE_APPLICATION_IDENTIFIER=iso
+VITE_PUBLIC_DSN=your-sentry-dsn  # Optional, for error tracking
+```
+
+For sandbox environment testing:
+
+```bash
+# Create sandbox environment file when needed
+cp apps/social-impact-isp/.env.sandbox apps/social-impact-isp/.env.sandbox.local
 ```
 
 4. Configure Auth0:
@@ -132,10 +141,32 @@ npm -w social-impact-isp run build
 
 The application supports different environments:
 
-- `.env.sandbox` - Sandbox environment configuration (use for development)
+- `.env.local` - Local development configuration (default for development)
+- `.env.sandbox.local` - Sandbox environment configuration (for testing against sandbox APIs)
 - `.env.production` - Production environment configuration
 
-Copy the appropriate environment file and rename it to `.env.local` for local development.
+Development workflow:
+
+1. Local Development (Default):
+
+   ```bash
+   # Start the development server with local configuration
+   npm -w social-impact-isp run dev
+   ```
+
+2. Sandbox Testing:
+
+   ```bash
+   # Start the development server with sandbox configuration
+   npm -w social-impact-isp run dev -- --mode sandbox
+   ```
+
+3. Production Build:
+
+   ```bash
+   # Build for production
+   npm -w social-impact-isp run build:production
+   ```
 
 ## Type Safety
 
