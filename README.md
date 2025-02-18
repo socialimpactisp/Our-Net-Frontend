@@ -185,4 +185,3 @@ Common issues:
 
 ## License
 
-[Your License Information Here]
