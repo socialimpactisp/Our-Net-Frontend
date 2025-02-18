@@ -7,7 +7,7 @@
     <slot />
 
     <template #footer>
-      <app-footer />
+      <app-footer :company="{ name: 'Social Impact ISP' }" />
     </template>
   </AppLayout>
 </template>

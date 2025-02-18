@@ -11,11 +11,11 @@ export default {
     extend: {
       colors: {
         brand: {
-          red: '#ee3124',
-          dark: '#58595b',
-          mid: '#939598',
-          light: '#c7c8ca',
-        }
+          red: "#ee3124",
+          dark: "#58595b",
+          mid: "#939598",
+          light: "#c7c8ca",
+        },
       },
       boxShadow: {
         outline: "0 0 0 3px rgba(180, 214, 228, 0.8)",
