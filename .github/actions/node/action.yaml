@@ -3,8 +3,7 @@ description: "Sets up node with consistent version across project and installs d
 inputs:
   nodeVersion:
     description: "The version of node to use"
-    type: number
-    default: 20
+    default: "20"
 runs:
   using: "composite"
   steps:
