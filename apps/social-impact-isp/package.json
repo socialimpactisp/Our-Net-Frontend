@@ -9,15 +9,15 @@
   ],
   "scripts": {
     "build": "vite build",
-    "build:development": "npm run build -- --mode=development",
-    "build:production": "npm run build -- --mode=production",
-    "build:sandbox": "npm run build -- --mode=sandbox",
+    "build:development": "vite build --mode=development",
+    "build:production": "vite build --mode=production",
+    "build:sandbox": "vite build --mode=sandbox",
     "preview": "vite preview",
-    "dev": "npm run build:development",
-    "prod": "npm run build:production",
-    "watch": "vite",
+    "dev": "vite",
     "lint": "eslint --ext .js,.ts,.vue ./src",
-    "format": "prettier src --write"
+    "lint:fix": "eslint --ext .js,.ts,.vue ./src --fix",
+    "format": "prettier src --write",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@affinity/api": "*",

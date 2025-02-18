@@ -1,445 +1,514 @@
 <template>
-  <div>
-    <div class="relative bg-brand py-16">
-      <div class="max-w-screen-2xl mx-auto text-white px-6">
-        <h3 class="text-5xl text-center font-black tracking-tight">Join now</h3>
-        <p
-          class="mt-4 text-xl text-center text-gray-200 font-medium max-w-lg mx-auto"
-        >
-          Create your account and make the switch. You'll need to know your
-          account number with your previous provider.
+  <error-boundary>
+    <div>
+      <div class="relative bg-brand py-16">
+        <div class="max-w-screen-2xl mx-auto text-white px-6">
+          <h3 class="text-5xl text-center font-black tracking-tight">
+            Join now
+          </h3>
+          <p
+            class="mt-4 text-xl text-center text-gray-200 font-medium max-w-lg mx-auto"
+          >
+            Create your account and make the switch. You'll need to know your
+            account number with your previous provider.
+          </p>
+        </div>
+      </div>
+
+      <div v-if="disableSignUp" class="py-12 px-6">
+        <loading-spinner />
+        <p class="text-center text-lg text-gray-500">
+          Please wait while we process your order.
         </p>
       </div>
-    </div>
-
-    <div v-if="disableSignUp" class="py-12 px-6">
-      <loading-spinner />
-      <p class="text-center text-lg text-gray-500">
-        Please wait while we process your order.
-      </p>
-    </div>
-    <template v-else>
-      <div
-        v-if="
-          selected && selected.address && Object.keys(selected.address).length
-        "
-        class="bg-white"
-      >
-        <div class="max-w-screen-2xl mx-auto">
-          <div class="pt-12 px-6 text-center">
-            <h3
-              class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
-            >
-              Review your Order with the Social Impact ISP
-            </h3>
-            <div class="max-w-screen-lg mx-auto border border-black rounded-xl">
-              <div>
-                <div class="flex justify-center flex m-0 p-0 mt-4">
-                  <h3 class="mb-4 text-center text-xl uppercase font-bold">
-                    Selected Address
-                  </h3>
-                </div>
-                <div class="flex items-center justify-center pb-5 gap-8">
-                  <p class="mt-2 text-2xl font-black">
-                    {{ selected.address.full_address }}
-                  </p>
-                  <span
-                    class="text-sm underline text-gray-600 cursor-pointer font-light"
-                    @click="clearAddress"
-                    >change address</span
-                  >
-                </div>
-              </div>
-              <div
-                class="p-6 sm:p-8 grid sm:divide-x divide-black grid-flow-row sm:grid-flow-col auto-cols-fr gap-8"
+      <div v-else class="bg-white">
+        <div
+          v-if="
+            selected && selected.address && Object.keys(selected.address).length
+          "
+          class="bg-white"
+        >
+          <div class="max-w-screen-2xl mx-auto">
+            <div class="pt-12 px-6 text-center">
+              <h3
+                class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
               >
-                <div v-if="selected && selected.product" class="sm:text-center">
-                  <h5 class="text-md sm:text-xl font-semibold opacity-75">
-                    Selected plan
-                  </h5>
-                  <h3 class="text-2xl sm:text-3xl font-black">
-                    {{ selected.product.productName }}
-                  </h3>
-                  <span
-                    class="text-sm underline text-gray-700 cursor-pointer"
-                    @click="changeProduct"
-                  >
-                    change plan
-                  </span>
-                </div>
-                <div class="sm:text-center">
-                  <h5 class="text-md sm:text-xl font-semibold opacity-75">
-                    {{ selected.modem.productName }}
-                  </h5>
-                  <h3 class="text-2xl sm:text-3xl font-black">
-                    {{ getDollars(selected.modem.price) }}
-                  </h3>
-                </div>
-                <div v-if="selected && selected.product" class="sm:text-center">
-                  <h5 class="text-md sm:text-xl font-semibold opacity-75">
-                    Monthly broadband charge
-                  </h5>
-                  <h3 class="text-2xl sm:text-3xl font-black">
-                    {{ getDollars(selected.product.price) }}
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div v-if="!isAuthenticated" class="py-12 px-6 border-b-2">
-            <div class="mb-4">
-              <p class="text-center text-lg text-gray-700">
-                Login or create an account for the Social Impact ISP to
-                continue.
-              </p>
-            </div>
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-4 space-y-2 sm:space-y-0"
-            >
-              <ui-button size="lg" rounded theme="dark" @click="register">
-                Create an Account
-              </ui-button>
-              <span>or</span>
-              <ui-button size="lg" rounded theme="dark" @click="register">
-                Login
-              </ui-button>
-            </div>
-            <div class="mt-6">
-              <p class="text-center text-sm text-gray-700">
-                Note: Creating an account or logging in will redirect you Auth0,
-                to our secure authentication provider.
-              </p>
-            </div>
-          </div>
-
-          <div v-if="isAuthenticated" class="py-12 px-6 border-b-2">
-            <h3
-              class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
-            >
-              Personal details
-            </h3>
-            <div class="relative max-w-lg mx-auto space-y-4">
-              <div
-                v-if="detailsLoading"
-                class="absolute z-30 inset-0 flex items-center justify-center bg-white"
-              >
-                <loading-spinner />
-              </div>
-              <div
-                v-if="errors.length"
-                class="bg-red-200 text-red-900 rounded-lg py-4 px-6"
-              >
-                <b>Please correct the following error(s):</b>
-                <ul>
-                  <li v-for="(error, index) in errors" :key="index">
-                    {{ error }}
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ui-label value="First name" />
-                <ui-input v-model="form.first_name" placeholder="John" />
-              </div>
-              <div>
-                <ui-label value="Last name" />
-                <ui-input v-model="form.last_name" placeholder="Doe" />
-              </div>
-              <div>
-                <ui-label value="Phone number" />
-                <ui-input v-model="form.phone" placeholder="021 345 6789" />
-              </div>
-
-              <ui-button
-                v-if="!customerExists"
-                class="w-full italic"
-                rounded
-                theme="dark"
-                @click="updateUser"
-              >
-                Update Details & Continue
-              </ui-button>
-            </div>
-          </div>
-
-          <div
-            v-if="isAuthenticated && customerExists"
-            class="py-12 px-6 border-b-2"
-          >
-            <h3
-              class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
-            >
-              Connection Details
-            </h3>
-            <div class="relative max-w-lg mx-auto space-y-4">
-              <div
-                v-if="detailsLoading"
-                class="absolute z-30 inset-0 flex items-center justify-center bg-white"
-              >
-                <loading-spinner />
-              </div>
-              <div
-                v-if="metadata_errors.length"
-                class="bg-red-200 text-red-900 rounded-lg py-4 px-6"
-              >
-                <b>Please correct the following error(s):</b>
-                <ul>
-                  <li v-for="(error, index) in metadata_errors" :key="index">
-                    {{ error }}
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ui-label value="Preferred connection date" />
-
-                <label for="asap" class="flex items-start">
-                  <input
-                    id="asap"
-                    v-model="metadata_form.preferred_connection"
-                    class="mt-1"
-                    type="radio"
-                    name="preferred_connection"
-                    value="asap"
-                  />
-                  <span class="font-medium text-gray-700 leading-5 ml-2">
-                    ASAP
-                  </span>
-                </label>
-                <label for="date" class="flex items-start">
-                  <input
-                    id="date"
-                    v-model="metadata_form.preferred_connection"
-                    class="mt-1"
-                    type="radio"
-                    name="preferred_connection"
-                    value="date"
-                    placeholder="yyyy-mm-dd"
-                  />
-                  <span class="font-medium text-gray-700 leading-5 ml-2">
-                    On this date:
-                    <input
-                      v-model="metadata_form.preferred_connection_date"
-                      type="date"
-                      class="ml-2"
-                    />
-                  </span>
-                </label>
-              </div>
-              <div>
-                <ui-label value="Preferred connection time" />
-                <label for="any" class="flex items-start">
-                  <input
-                    id="any"
-                    v-model="metadata_form.preferred_connection_time"
-                    class="mt-1"
-                    type="radio"
-                    value="any"
-                    name="preferred_connection_time"
-                  />
-                  <span class="font-medium text-gray-700 leading-5 ml-2">
-                    Any
-                  </span>
-                </label>
-                <label for="am" class="flex items-start">
-                  <input
-                    id="am"
-                    v-model="metadata_form.preferred_connection_time"
-                    class="mt-1"
-                    type="radio"
-                    value="am"
-                    name="preferred_connection_time"
-                  />
-                  <span class="font-medium text-gray-700 leading-5 ml-2">
-                    AM
-                  </span>
-                </label>
-                <label for="pm" class="flex items-start">
-                  <input
-                    id="pm"
-                    v-model="metadata_form.preferred_connection_time"
-                    class="mt-1"
-                    type="radio"
-                    value="pm"
-                    name="preferred_connection_time"
-                  />
-                  <span class="font-medium text-gray-700 leading-5 ml-2">
-                    PM
-                  </span>
-                </label>
-              </div>
-              <div>
-                <ui-label value="Any other comments or questions?" />
-                <ui-input v-model="metadata_form.comments" />
-              </div>
-
-              <ui-button
-                v-if="!metadataExists"
-                class="w-full italic"
-                rounded
-                theme="dark"
-                @click="checkMetadataForm"
-              >
-                Update Details & Continue
-              </ui-button>
-            </div>
-          </div>
-
-          <div
-            v-if="isAuthenticated && metadataExists"
-            class="py-12 px-6 border-b-2"
-          >
-            <div class="text-center mb-4">
-              <h3 class="mb-3 text-2xl text-gray-600 uppercase font-black">
-                Your current provider
+                Review your Order with the Social Impact ISP
               </h3>
-              <p>
-                <provider-details>
-                  <span class="underline cursor-pointer"
-                    >Where can I find this?</span
+              <div
+                class="max-w-screen-lg mx-auto border border-black rounded-xl"
+              >
+                <div>
+                  <div class="flex justify-center flex m-0 p-0 mt-4">
+                    <h3 class="mb-4 text-center text-xl uppercase font-bold">
+                      Selected Address
+                    </h3>
+                  </div>
+                  <div class="flex items-center justify-center pb-5 gap-8">
+                    <p class="mt-2 text-2xl font-black">
+                      {{ selected.address.full_address }}
+                    </p>
+                    <span
+                      class="text-sm underline text-gray-600 cursor-pointer font-light"
+                      @click="clearAddress"
+                      >change address</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="p-6 sm:p-8 grid sm:divide-x divide-black grid-flow-row sm:grid-flow-col auto-cols-fr gap-8"
+                >
+                  <div
+                    v-if="selected && selected.product"
+                    class="sm:text-center"
                   >
-                </provider-details>
-              </p>
+                    <h5 class="text-md sm:text-xl font-semibold opacity-75">
+                      Selected plan
+                    </h5>
+                    <h3 class="text-2xl sm:text-3xl font-black">
+                      {{ selected.product.productName }}
+                    </h3>
+                    <span
+                      class="text-sm underline text-gray-700 cursor-pointer"
+                      @click="changeProduct"
+                    >
+                      change plan
+                    </span>
+                  </div>
+                  <div class="sm:text-center">
+                    <h5
+                      v-if="selected?.modem"
+                      class="text-md sm:text-xl font-semibold opacity-75"
+                    >
+                      {{ selected.modem.productName }}
+                    </h5>
+                    <h3
+                      v-if="selected?.modem"
+                      class="text-2xl sm:text-3xl font-black"
+                    >
+                      {{ getDollars(selected.modem.price) }}
+                    </h3>
+                  </div>
+                  <div
+                    v-if="selected && selected.product"
+                    class="sm:text-center"
+                  >
+                    <h5 class="text-md sm:text-xl font-semibold opacity-75">
+                      Monthly broadband charge
+                    </h5>
+                    <h3 class="text-2xl sm:text-3xl font-black">
+                      {{ getDollars(selected.product.price) }}
+                    </h3>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="mt-8">
-              <div class="max-w-md mx-auto border rounded-xl p-6">
-                <div class="space-y-4">
-                  <p class="font-semibold">
-                    Tell us about your current broadband provider
-                  </p>
-                  <label for="tranferFrom" class="flex items-start">
+
+            <div v-if="!isAuthenticated" class="py-12 px-6 border-b-2">
+              <div class="mb-4">
+                <p class="text-center text-lg text-gray-700">
+                  Login or create an account for the Social Impact ISP to
+                  continue.
+                </p>
+              </div>
+              <div
+                class="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-4 space-y-2 sm:space-y-0"
+              >
+                <ui-button size="lg" rounded theme="dark" @click="register">
+                  Create an Account
+                </ui-button>
+                <span>or</span>
+                <ui-button size="lg" rounded theme="dark" @click="register">
+                  Login
+                </ui-button>
+              </div>
+              <div class="mt-6">
+                <p class="text-center text-sm text-gray-700">
+                  Note: Creating an account or logging in will redirect you
+                  Auth0, to our secure authentication provider.
+                </p>
+              </div>
+            </div>
+
+            <div v-if="isAuthenticated" class="py-12 px-6 border-b-2">
+              <h3
+                class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
+              >
+                Personal details
+              </h3>
+              <div class="relative max-w-lg mx-auto space-y-4">
+                <div
+                  v-if="errors.length"
+                  class="bg-red-200 text-red-900 rounded-lg py-4 px-6"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <b>Please correct the following error(s):</b>
+                  <ul>
+                    <li v-for="(error, index) in errors" :key="index">
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <ui-label for="firstName" value="First name" required />
+                  <ui-input
+                    id="firstName"
+                    v-model="form.first_name"
+                    placeholder="John"
+                    aria-required="true"
+                    :aria-invalid="!!getFieldErrors('first_name').length"
+                    :aria-describedby="
+                      getFieldErrors('first_name').length
+                        ? 'firstName-error'
+                        : undefined
+                    "
+                  />
+                  <div
+                    v-if="getFieldErrors('first_name').length"
+                    id="firstName-error"
+                    class="text-red-500 text-sm mt-1"
+                  >
+                    {{ getFieldErrors("first_name")[0] }}
+                  </div>
+                </div>
+                <div>
+                  <ui-label for="lastName" value="Last name" required />
+                  <ui-input
+                    id="lastName"
+                    v-model="form.last_name"
+                    placeholder="Doe"
+                    aria-required="true"
+                    :aria-invalid="!!getFieldErrors('last_name').length"
+                    :aria-describedby="
+                      getFieldErrors('last_name').length
+                        ? 'lastName-error'
+                        : undefined
+                    "
+                  />
+                  <div
+                    v-if="getFieldErrors('last_name').length"
+                    id="lastName-error"
+                    class="text-red-500 text-sm mt-1"
+                  >
+                    {{ getFieldErrors("last_name")[0] }}
+                  </div>
+                </div>
+                <div>
+                  <ui-label for="phone" value="Phone number" required />
+                  <ui-input
+                    id="phone"
+                    v-model="form.phone"
+                    placeholder="021 345 6789"
+                    type="tel"
+                    aria-required="true"
+                    :aria-invalid="!!getFieldErrors('phone').length"
+                    :aria-describedby="
+                      getFieldErrors('phone').length ? 'phone-error' : undefined
+                    "
+                  />
+                  <div
+                    v-if="getFieldErrors('phone').length"
+                    id="phone-error"
+                    class="text-red-500 text-sm mt-1"
+                  >
+                    {{ getFieldErrors("phone")[0] }}
+                  </div>
+                </div>
+
+                <ui-button
+                  v-if="!customerExists"
+                  class="w-full italic"
+                  rounded
+                  theme="dark"
+                  @click="updateUser"
+                >
+                  Update Details & Continue
+                </ui-button>
+              </div>
+            </div>
+
+            <div
+              v-if="isAuthenticated && customerExists"
+              class="py-12 px-6 border-b-2"
+            >
+              <h3
+                class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
+              >
+                Connection Details
+              </h3>
+              <div class="relative max-w-lg mx-auto space-y-4">
+                <div
+                  v-if="detailsLoading"
+                  class="absolute z-30 inset-0 flex items-center justify-center bg-white"
+                >
+                  <loading-spinner />
+                </div>
+                <div
+                  v-if="metadata_errors.length"
+                  class="bg-red-200 text-red-900 rounded-lg py-4 px-6"
+                >
+                  <b>Please correct the following error(s):</b>
+                  <ul>
+                    <li v-for="(error, index) in metadata_errors" :key="index">
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <ui-label value="Preferred connection date" />
+
+                  <label for="asap" class="flex items-start">
                     <input
-                      id="tranferFrom"
-                      v-model="isp.dont_transfer"
+                      id="asap"
+                      v-model="metadata_form.preferred_connection"
                       class="mt-1"
-                      type="checkbox"
-                      @change="checkIsp"
+                      type="radio"
+                      name="preferred_connection"
+                      value="asap"
                     />
                     <span class="font-medium text-gray-700 leading-5 ml-2">
-                      I don't currently have a fixed-line broadband service at
-                      my address
+                      ASAP
                     </span>
                   </label>
+                  <label for="date" class="flex items-start">
+                    <input
+                      id="date"
+                      v-model="metadata_form.preferred_connection"
+                      class="mt-1"
+                      type="radio"
+                      name="preferred_connection"
+                      value="date"
+                      placeholder="yyyy-mm-dd"
+                    />
+                    <span class="font-medium text-gray-700 leading-5 ml-2">
+                      On this date:
+                      <input
+                        v-model="metadata_form.preferred_connection_date"
+                        type="date"
+                        class="ml-2"
+                      />
+                    </span>
+                  </label>
+                </div>
+                <div>
+                  <ui-label value="Preferred connection time" />
+                  <label for="any" class="flex items-start">
+                    <input
+                      id="any"
+                      v-model="metadata_form.preferred_connection_time"
+                      class="mt-1"
+                      type="radio"
+                      value="any"
+                      name="preferred_connection_time"
+                    />
+                    <span class="font-medium text-gray-700 leading-5 ml-2">
+                      Any
+                    </span>
+                  </label>
+                  <label for="am" class="flex items-start">
+                    <input
+                      id="am"
+                      v-model="metadata_form.preferred_connection_time"
+                      class="mt-1"
+                      type="radio"
+                      value="am"
+                      name="preferred_connection_time"
+                    />
+                    <span class="font-medium text-gray-700 leading-5 ml-2">
+                      AM
+                    </span>
+                  </label>
+                  <label for="pm" class="flex items-start">
+                    <input
+                      id="pm"
+                      v-model="metadata_form.preferred_connection_time"
+                      class="mt-1"
+                      type="radio"
+                      value="pm"
+                      name="preferred_connection_time"
+                    />
+                    <span class="font-medium text-gray-700 leading-5 ml-2">
+                      PM
+                    </span>
+                  </label>
+                </div>
+                <div>
+                  <ui-label value="Any other comments or questions?" />
+                  <ui-input v-model="metadata_form.comments as string" />
+                </div>
 
-                  <template v-if="!isp.dont_transfer">
-                    <div class="border-t" />
-                    <div
-                      v-if="transferErrors.length"
-                      class="bg-red-200 text-red-900 rounded-lg py-4 px-6"
+                <ui-button
+                  v-if="!metadataExists"
+                  class="w-full italic"
+                  rounded
+                  theme="dark"
+                  @click="checkMetadataForm"
+                >
+                  Update Details & Continue
+                </ui-button>
+              </div>
+            </div>
+
+            <div
+              v-if="isAuthenticated && metadataExists"
+              class="py-12 px-6 border-b-2"
+            >
+              <div class="text-center mb-4">
+                <h3 class="mb-3 text-2xl text-gray-600 uppercase font-black">
+                  Your current provider
+                </h3>
+                <p>
+                  <provider-details>
+                    <span class="underline cursor-pointer"
+                      >Where can I find this?</span
                     >
-                      <b>Please correct the following error(s):</b>
-                      <ul>
-                        <li
-                          v-for="(error, index) in transferErrors"
-                          :key="index"
-                        >
-                          {{ error }}
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <p class="italic text-sm text-emerald-700">
-                        Tip: You can find this information on your last
-                        broadband bill.
-                      </p>
-                    </div>
-
-                    <div class="w-full">
-                      <ui-label value="My current broadband provider is" />
-                      <ui-input
-                        v-model="isp.transfer_from"
-                        placeholder="e.g. Spark, Vodafone..."
+                  </provider-details>
+                </p>
+              </div>
+              <div class="mt-8">
+                <div class="max-w-md mx-auto border rounded-xl p-6">
+                  <div class="space-y-4">
+                    <p class="font-semibold">
+                      Tell us about your current broadband provider
+                    </p>
+                    <label for="tranferFrom" class="flex items-start">
+                      <input
+                        id="tranferFrom"
+                        v-model="isp.dont_transfer"
+                        class="mt-1"
+                        type="checkbox"
+                        @change="checkIsp"
                       />
-                    </div>
+                      <span class="font-medium text-gray-700 leading-5 ml-2">
+                        I don't currently have a fixed-line broadband service at
+                        my address
+                      </span>
+                    </label>
 
-                    <div class="w-full">
-                      <ui-label value="The name on my account is" />
-                      <ui-input
-                        v-model="isp.name_on_account"
-                        placeholder="e.g. John Smith"
-                      />
-                    </div>
-
-                    <div class="w-full">
-                      <ui-label
-                        value="My account number with my current provider is"
-                      />
-                      <ui-input
-                        v-model="isp.account_number"
-                        placeholder="e.g. ABC12345..."
-                      />
-                    </div>
-
-                    <div>
-                      <ui-button
-                        size="lg"
-                        rounded
-                        class="w-full"
-                        theme="dark"
-                        @click="validateTransfer"
+                    <template v-if="!isp.dont_transfer">
+                      <div class="border-t" />
+                      <div
+                        v-if="transferErrors.length"
+                        class="bg-red-200 text-red-900 rounded-lg py-4 px-6"
                       >
-                        Continue →
-                      </ui-button>
-                    </div>
-                  </template>
+                        <b>Please correct the following error(s):</b>
+                        <ul>
+                          <li
+                            v-for="(error, index) in transferErrors"
+                            :key="index"
+                          >
+                            {{ error }}
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="italic text-sm text-emerald-700">
+                          Tip: You can find this information on your last
+                          broadband bill.
+                        </p>
+                      </div>
+
+                      <div class="w-full">
+                        <ui-label value="My current broadband provider is" />
+                        <ui-input
+                          v-model="isp.transfer_from"
+                          placeholder="e.g. Spark, Vodafone..."
+                        />
+                      </div>
+
+                      <div class="w-full">
+                        <ui-label value="The name on my account is" />
+                        <ui-input
+                          v-model="isp.name_on_account"
+                          placeholder="e.g. John Smith"
+                        />
+                      </div>
+
+                      <div class="w-full">
+                        <ui-label
+                          value="My account number with my current provider is"
+                        />
+                        <ui-input
+                          v-model="isp.account_number"
+                          placeholder="e.g. ABC12345..."
+                        />
+                      </div>
+
+                      <div>
+                        <ui-button
+                          size="lg"
+                          rounded
+                          class="w-full"
+                          theme="dark"
+                          @click="validateTransfer"
+                        >
+                          Continue →
+                        </ui-button>
+                      </div>
+                    </template>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div
-            v-if="isAuthenticated && customerExists && tranferCanContinue"
-            class="py-12 px-6 border-b-2"
-          >
-            <div class="text-center mb-4">
-              <h3 class="mb-3 text-2xl text-gray-600 uppercase font-black">
-                Payment details
-              </h3>
-            </div>
-            <div class="max-w-md mx-auto">
-              <payment-form
-                :selected="selected"
-                :customer-address="customerAddress"
-                @confirmed="onSubmit"
-              />
-              <div class="mt-6">
-                <ul class="list-disc pl-6 text-sm text-gray-700 space-y-2">
-                  <li>
-                    Please allow 3 to 10 working days to get your broadband up
-                    and running.
-                  </li>
-                  <li>
-                    You will be charged for the modem immediately if you have
-                    asked for it, refunded if we can't go ahead with your order.
-                  </li>
-                  <li>
-                    Once your service is active, your credit card will be
-                    charged in advance on the 1st of every month for a full
-                    month of service.
-                  </li>
-                  <li>
-                    As soon as your service goes live, you will be charged for
-                    the remainder of the month.
-                  </li>
-                  <li>
-                    If you terminate your service, you will be refunded a
-                    prorated credit for the prepaid amount remaining on your
-                    account.
-                  </li>
-                </ul>
+            <div
+              v-if="isAuthenticated && customerExists && tranferCanContinue"
+              class="py-12 px-6 border-b-2"
+            >
+              <div class="text-center mb-4">
+                <h3 class="mb-3 text-2xl text-gray-600 uppercase font-black">
+                  Payment details
+                </h3>
+              </div>
+              <div class="max-w-md mx-auto">
+                <payment-form
+                  v-if="customerAddress"
+                  :selected="selected"
+                  :customer-address="customerAddress"
+                  @confirmed="onSubmit"
+                />
+                <div class="mt-6">
+                  <ul class="list-disc pl-6 text-sm text-gray-700 space-y-2">
+                    <li>
+                      Please allow 3 to 10 working days to get your broadband up
+                      and running.
+                    </li>
+                    <li>
+                      You will be charged for the modem immediately if you have
+                      asked for it, refunded if we can't go ahead with your
+                      order.
+                    </li>
+                    <li>
+                      Once your service is active, your credit card will be
+                      charged in advance on the 1st of every month for a full
+                      month of service.
+                    </li>
+                    <li>
+                      As soon as your service goes live, you will be charged for
+                      the remainder of the month.
+                    </li>
+                    <li>
+                      If you terminate your service, you will be refunded a
+                      prorated credit for the prepaid amount remaining on your
+                      account.
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="py-12 px-6 h-50 bg-brand" />
       </div>
-      <div class="py-12 px-6 h-50 bg-brand" />
-    </template>
-  </div>
+    </div>
+  </error-boundary>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Form } from "@affinity/common/form";
-
+import ErrorBoundary from "@/components/ErrorBoundary.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 import UiButton from "@/components/ui/Button.vue";
@@ -449,6 +518,8 @@ import UiLabel from "@/components/ui/Label.vue";
 import PaymentForm from "./components/PaymentForm.vue";
 import ProviderDetails from "./components/ProviderDetails.vue";
 import { format } from "date-fns";
+import { useFormValidation, rules } from "@/lib/validation";
+import type { Customer, CustomerForm } from "@/types/api";
 
 interface AddressesItem {
   id: number;
@@ -492,30 +563,6 @@ interface SelectedAddress {
   modem: Modem | null;
 }
 
-interface Customer {
-  id: number;
-  account_id: number;
-  auth0_sub: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  dob: string;
-  phone: string;
-  marketing: string;
-  stripe_id: string;
-  created_at: string;
-  updated_at: string;
-  accessCode: string;
-}
-
-interface CustomerForm {
-  first_name: string;
-  last_name: string;
-  dob?: string;
-  phone: string;
-  access_code: string;
-}
-
 interface CustomerAddress {
   address_id: number;
   plan?: string;
@@ -544,6 +591,7 @@ export default defineComponent({
   name: "SignUpStep2",
 
   components: {
+    ErrorBoundary,
     LoadingSpinner,
     UiButton,
     UiInput,
@@ -553,6 +601,25 @@ export default defineComponent({
   },
 
   data() {
+    const validation = useFormValidation();
+
+    validation.registerField("first_name", "", [
+      rules.required("First name is required"),
+      rules.minLength(2, "First name must be at least 2 characters"),
+      rules.maxLength(50, "First name must be less than 50 characters"),
+    ]);
+
+    validation.registerField("last_name", "", [
+      rules.required("Last name is required"),
+      rules.minLength(2, "Last name must be at least 2 characters"),
+      rules.maxLength(50, "Last name must be less than 50 characters"),
+    ]);
+
+    validation.registerField("phone", "", [
+      rules.required("Phone number is required"),
+      rules.phone("Please enter a valid phone number"),
+    ]);
+
     return {
       selected: null as SelectedAddress | null,
       detailsLoading: false,
@@ -568,18 +635,19 @@ export default defineComponent({
       },
       transferErrors: [] as string[],
       errors: [] as string[],
-      form: new Form({
+      form: {
         first_name: "",
         last_name: "",
         phone: "",
-      }),
+      },
       metadata_form: new Form({
-        comments: "",
-        preferred_connection: "asap",
-        preferred_connection_date: today,
-        preferred_connection_time: "any",
+        comments: "" as string,
+        preferred_connection: "asap" as string,
+        preferred_connection_date: today as string,
+        preferred_connection_time: "any" as string,
       }),
       metadata_errors: [] as string[],
+      validation,
     };
   },
 
@@ -617,10 +685,10 @@ export default defineComponent({
             preferred_connection_date:
               this.metadata_form.preferred_connection === "asap"
                 ? today
-                : this.metadata_form.preferred_connection_date,
-            preferred_connection_time:
-              this.metadata_form.preferred_connection_time,
-            comments: this.metadata_form.comments,
+                : (this.metadata_form.preferred_connection_date as string),
+            preferred_connection_time: this.metadata_form
+              .preferred_connection_time as string,
+            comments: this.metadata_form.comments as string,
           },
         };
       }
@@ -637,6 +705,15 @@ export default defineComponent({
         }
         this.getUser();
       }
+    },
+    "form.first_name"(value: string) {
+      this.validation.validateField("first_name", value);
+    },
+    "form.last_name"(value: string) {
+      this.validation.validateField("last_name", value);
+    },
+    "form.phone"(value: string) {
+      this.validation.validateField("phone", value);
     },
   },
 
@@ -672,7 +749,7 @@ export default defineComponent({
   },
 
   methods: {
-    checkIsp(event: InputEvent) {
+    checkIsp(event: Event) {
       const input = event.target as HTMLInputElement;
       if (input.checked) {
         this.isp.transfer_from = "";
@@ -706,19 +783,6 @@ export default defineComponent({
           this.disableSignUp = false;
           console.error(e);
         });
-
-      // this.$api.post('/customer/address', this.customerAddress, {
-      //   headers: { Authorization: `Bearer ${accessToken}` }
-      // }).then(res => {
-      //   this.disableSignUp = false
-      //   if (res.status === 200 || res.status === 201) {
-      //     localStorage.removeItem('affinity_signup') // Remove signup data on successful signup.
-      //     this.$router.push('/success') // Push user to success page.
-      //   }
-      // }).catch(e => {
-      //   this.disableSignUp = false
-      //   console.error(e)
-      // })
     },
 
     register() {
@@ -922,6 +986,10 @@ export default defineComponent({
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
+    },
+
+    getFieldErrors(fieldName: string): string[] {
+      return this.validation.getFieldErrors(fieldName);
     },
   },
 });
