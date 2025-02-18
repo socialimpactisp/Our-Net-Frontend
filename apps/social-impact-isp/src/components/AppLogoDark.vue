@@ -1,5 +1,5 @@
 <template>
-  <img src="/images/retailer-logo.png" alt="Social Impact ISP" />
+  <img src="/images/retailer-logo.png" alt="OurNet" />
 </template>
 
 <script lang="ts">

@@ -2,7 +2,7 @@
   <div class="grid sm:grid-cols-6 sm:items-center gap-8">
     <div class="col-span-2 text-white">
       <h3 class="text-3xl font-bold tracking-tight">
-        How do I switch to Social Impact ISP?
+        How do I switch to OurNet?
       </h3>
       <p class="mt-2 text-lg font-medium text-gray-200">
         Enter your address and select your plan.

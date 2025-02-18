@@ -1,14 +1,14 @@
 <template>
   <ui-banner>
-    Social Impact ISP - Customer Complaints Policy
+    OurNet - Customer Complaints Policy
     <template #content>
-      <p>Social Impact ISP's Commitment to our customers</p>
+      <p>OurNet's Commitment to our customers</p>
     </template>
   </ui-banner>
 
   <page-container>
     <customer-complaints
-      isp-name="Social Impact ISP"
+      isp-name="OurNet"
       website="https://ournet.com/"
       support-phone="09 883 0018"
       support-phone-e164="+6498830018"

@@ -25,8 +25,7 @@
         </p>
       </div>
       <p class="font-medium">
-        We look forward to switching you over to our Social Impact ISP for Staff
-        & Friends.
+        We look forward to switching you over to our OurNet for Staff & Friends.
       </p>
     </div>
 

@@ -2,8 +2,8 @@
   <ui-banner>Terms &amp; Conditions</ui-banner>
   <page-container>
     <terms-and-conditions
-      isp-name="Social Impact ISP"
-      parent-company="Social Impact ISP Ltd (a subsidiary of Devoli Ltd)"
+      isp-name="OurNet"
+      parent-company="OurNet Ltd (a subsidiary of Devoli Ltd)"
       website="https://ournet.com/"
       support-phone="09 883 0018"
       support-phone-e164="+6498830018"

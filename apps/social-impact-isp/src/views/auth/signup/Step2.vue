@@ -33,7 +33,7 @@
               <h3
                 class="mb-4 text-center text-2xl text-gray-600 uppercase font-black"
               >
-                Review your Order with the Social Impact ISP
+                Review your Order with OurNet
               </h3>
               <div
                 class="max-w-screen-lg mx-auto border border-black rounded-xl"
@@ -107,8 +107,7 @@
             <div v-if="!isAuthenticated" class="py-12 px-6 border-b-2">
               <div class="mb-4">
                 <p class="text-center text-lg text-gray-700">
-                  Login or create an account for the Social Impact ISP to
-                  continue.
+                  Login or create an account for OurNet to continue.
                 </p>
               </div>
               <div

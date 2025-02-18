@@ -18,7 +18,7 @@
       <div class="mb-4">
         <h2 class="text-md font-medium mb-4">Add Payment Method</h2>
         <p class="text-gray-600 text-sm">
-          Add a payment method to your Social Impact ISP account.
+          Add a payment method to your OurNet account.
         </p>
       </div>
 
@@ -29,11 +29,11 @@
         <ui-label for="billingName" value="Cardholder name" />
         <ui-input
           id="billingName"
-          v-model="form.billing_name"
+          v-model="form.billing_name as string"
           class="mt-1 shadow-sm"
         />
         <div v-if="form.errors.has('billing_name')" class="text-red-500 mt-1">
-          <small>{{ form.errors.get("billing_name") }}</small>
+          <small>{{ form.errors.get("billing_name", "") }}</small>
         </div>
       </div>
 

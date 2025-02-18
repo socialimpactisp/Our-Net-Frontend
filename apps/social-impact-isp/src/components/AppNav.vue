@@ -4,7 +4,7 @@
   >
     <template v-if="isAccount">
       <app-nav-link tag="router-link" to="/" class="flex items-center">
-        Back to Social Impact ISP
+        Back to OurNet
         <icon-arrow-up-right class="ml-2 h-4" />
       </app-nav-link>
     </template>

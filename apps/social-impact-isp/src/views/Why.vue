@@ -3,11 +3,9 @@
     <div class="relative bg-brand py-16">
       <div class="max-w-screen-2xl mx-auto px-6">
         <div class="max-w-xl mx-auto text-white text-center">
-          <h1 class="text-5xl font-black tracking-tight">
-            Why Social Impact ISP?
-          </h1>
+          <h1 class="text-5xl font-black tracking-tight">Why OurNet?</h1>
           <p class="mt-4 text-xl font-medium text-gray-200">
-            Social Impact ISP is a fibre broadband provider.
+            OurNet is a fibre broadband provider.
           </p>
         </div>
       </div>
@@ -17,15 +15,15 @@
       <div class="max-w-screen-md mx-auto px-6 space-y-8">
         <div class="space-y-4 text-lg text-gray-800">
           <p class="font-semibold">
-            Social Impact ISP is an independent, NZ-owned broadband provider.
+            OurNet is an independent, NZ-owned broadband provider.
           </p>
           <p>
             We want to provider bog standard internet at a fair price. That's
             about it.
           </p>
           <p>
-            <strong>Social Impact ISP operates on a no contracts basis</strong>
-            which means it’s our job to keep you happy with low prices and
+            <strong>OurNet operates on a no contracts basis</strong>
+            which means it's our job to keep you happy with low prices and
             helpful, friendly service.
           </p>
         </div>

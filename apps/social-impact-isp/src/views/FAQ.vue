@@ -50,7 +50,7 @@ export default defineComponent({
         {
           title: "Do you offer home phone services? (i.e. VOIP landlines)",
           value:
-            "Yes, we offer home phone services via VOIP (Voice over IP) as an optional extra. A VOIP line with an NZ local phone number costs $5/month. You can bring your existing landline number with you, if you have one. At the moment you can’t add VOIP to your account during the signup flow, so if you’d like to add VOIP please get in touch after you have signed up.",
+            "Yes, we offer home phone services via VOIP (Voice over IP) as an optional extra. A VOIP line with an NZ local phone number costs $5/month. You can bring your existing landline number with you, if you have one. At the moment you can't add VOIP to your account during the signup flow, so if you'd like to add VOIP please get in touch after you have signed up.",
           category: "General",
         },
         {
@@ -62,7 +62,7 @@ export default defineComponent({
         {
           title: "Are your plans unlimited?",
           value:
-            " Yes, all Social Impact ISP plans offer unlimited data, no contracts and local help desk support during business hours.",
+            " Yes, all OurNet plans offer unlimited data, no contracts and local help desk support during business hours.",
           category: "General",
         },
         {
@@ -72,15 +72,15 @@ export default defineComponent({
           category: "General",
         },
         {
-          title: "How fast are Social Impact ISP plans?",
+          title: "How fast are OurNet plans?",
           value:
-            "There are a few factors that can impact the speed of your connection, including how close you are to an exchange, your computer’s capability, modem/router, line quality, software downloads and the number of devices connected.<br/><br/> Our broadband plan speeds represent the theoretic maximum speeds at which you are able to download and upload data from our network.",
+            "There are a few factors that can impact the speed of your connection, including how close you are to an exchange, your computer's capability, modem/router, line quality, software downloads and the number of devices connected.<br/><br/> Our broadband plan speeds represent the theoretic maximum speeds at which you are able to download and upload data from our network.",
           category: "General",
         },
         {
           title: "How do I check my broadband speed?",
           value:
-            'The best way to do an accurate speed test is by completing a quick speed test. We recommend using <a class="underline" href="https://www.speedtest.net">www.speedtest.net</a> and make sure you are using “Devoli” as the selected server to get the most accurate result. You will need to have your device plugged in via the ethernet cable.',
+            'The best way to do an accurate speed test is by completing a quick speed test. We recommend using <a class="underline" href="https://www.speedtest.net">www.speedtest.net</a> and make sure you are using "Devoli" as the selected server to get the most accurate result. You will need to have your device plugged in via the ethernet cable.',
           category: "General",
         },
         {
@@ -91,7 +91,7 @@ export default defineComponent({
             <li>If your property is in a right of way (ROW) or shared driveway, you may need to gain written consent from your neighbour(s) - the technician will advise if this is required during their initial visit</li>
             <li>If you live in a multi-dwelling unit (MDU) such as an apartment or flat, you will need to gain written consent from the building owner or body corporate to get fibre installed</li>
           </ul>
-          For more information on the consent process, visit your Local Fibre Company’s website:
+          For more information on the consent process, visit your Local Fibre Company's website:
           <ul class="block list-disc mt-4 pl-4 space-y-2">
             <li>Chorus (Most of New Zealand): <a class="underline" href="https://chorus.co.nz">chorus.co.nz</a></li>
             <li>North Power Fibre (Whangarei): <a class="underline" href="https://northpower.com">northpower.com</a></li>
@@ -104,13 +104,13 @@ export default defineComponent({
         {
           title: "Can I use my own modem?",
           value:
-            "Yes, that is our preferred approach. We‘ll do our best to help you get set up, but not be able to offer full troubleshooting assistance for all makes and models of modem. Technically speaking, all plans use DHCP for IPv4 and IPv6, with VLAN 10 tagging.",
+            "Yes, that is our preferred approach. We'll do our best to help you get set up, but not be able to offer full troubleshooting assistance for all makes and models of modem. Technically speaking, all plans use DHCP for IPv4 and IPv6, with VLAN 10 tagging.",
           category: "General",
         },
         {
           title:
             "Is there anything I need to know about where to place the modem when I set it up?",
-          value: `It’s important that modem is placed in the right environment so it operates as efficiently as possible. Here are our top tips:
+          value: `It's important that modem is placed in the right environment so it operates as efficiently as possible. Here are our top tips:
           <ul class="block list-disc mt-4 pl-4 space-y-2">
             <li>Do not place your modem in direct sunlight or hot areas.</li>
             <li>Do not let your modem come into contact with liquid or moisture at any time. To clean it, wipe it with a damp cloth.</li>
@@ -130,7 +130,7 @@ export default defineComponent({
         {
           title: "What happens if I move home?",
           value: `No worries! Your broadband can come with you as well. You must take your modem with you to your new address.<br/><br/>
-          Please give us a bit of notice so that we can tick the right boxes and make sure everything is in place. Ideally 15 working days should be enough time for us to get everything ready for you at your new home. Sometimes things might take a bit longer but we’ll be in touch if that happens. Depending on where you move to, we may not be able to provide you with exactly the same services you currently have – it all depends on what’s available in your new area.
+          Please give us a bit of notice so that we can tick the right boxes and make sure everything is in place. Ideally 15 working days should be enough time for us to get everything ready for you at your new home. Sometimes things might take a bit longer but we'll be in touch if that happens. Depending on where you move to, we may not be able to provide you with exactly the same services you currently have – it all depends on what's available in your new area.
           `,
           category: "General",
         },

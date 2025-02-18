@@ -9,7 +9,7 @@
             to="/"
             class="text-xl font-display font-bold text-brand-dark hover:text-brand-red transition-colors"
           >
-            Social Impact ISP
+            OurNet
           </router-link>
         </div>
         <!-- <div class="flex-1 h-6">
@@ -69,7 +69,7 @@
             </template>
             <template v-else>
               <ui-button
-                class="px-4 py-2 text-[13px] font-sans tracking-wide text-brand-dark bg-white hover:bg-brand-dark/5 rounded-lg border border-brand-dark/10 shadow-sm transition-colors"
+                class="!bg-brand-red !text-white hover:!bg-brand-red/90 rounded-lg border !border-transparent shadow-sm transition-colors px-4 py-2 text-[13px] font-sans tracking-wide"
                 tag="span"
                 to="/login"
                 @click="login"
