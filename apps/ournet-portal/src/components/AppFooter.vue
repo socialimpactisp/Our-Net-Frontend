@@ -85,7 +85,6 @@
 </template>
 
 <script lang="ts">
-import logoUrl from "@/assets/retailer-logo.png";
 import { defineComponent } from "vue";
 
 export default defineComponent({

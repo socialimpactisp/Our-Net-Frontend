@@ -18,8 +18,8 @@
           class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
         >
           <button
-            @click="scrollToSection"
             class="px-8 py-3.5 bg-brand-red text-white rounded-lg font-sans text-[13px] tracking-wide font-medium hover:bg-brand-red/70 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-200"
+            @click="scrollToSection"
           >
             Get Started
           </button>
@@ -54,8 +54,8 @@
         <div class="max-w-xl mx-auto">
           <div class="flex items-center">
             <access-code-input
-              @access-code="accessCodeEntered"
               class="w-full"
+              @access-code="accessCodeEntered"
             />
           </div>
         </div>
