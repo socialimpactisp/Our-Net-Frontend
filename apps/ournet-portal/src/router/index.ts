@@ -5,8 +5,10 @@ import registerRoutes from "./register";
 const Home = () =>
   import(/* webpackChunkName: "home" */ "@/views/home/Index.vue");
 const FAQ = () => import(/* webpackChunkName: "home" */ "@/views/FAQ.vue");
-const DigitalLiteracy = () => import(/* webpackChunkName: "home" */ "@/views/DigitalLiteracy.vue");
-const Eligibility = () => import(/* webpackChunkName: "home" */ "@/views/Eligibility.vue");
+const DigitalLiteracy = () =>
+  import(/* webpackChunkName: "home" */ "@/views/DigitalLiteracy.vue");
+const Eligibility = () =>
+  import(/* webpackChunkName: "home" */ "@/views/Eligibility.vue");
 const PrivacyPolicy = () =>
   import(/* webpackChunkName: "company" */ "@/views/PrivacyPolicy.vue");
 const TermsAndConditions = () =>
@@ -48,7 +50,8 @@ const routes: Array<RouteRecordRaw> = [
     component: Eligibility,
     meta: {
       title: "Eligibility Criteria  | Our Net",
-      description: "Find out what the eligibility criteria are for our DE customer households.",
+      description:
+        "Find out what the eligibility criteria are for our DE customer households.",
     },
   },
   {
@@ -57,7 +60,8 @@ const routes: Array<RouteRecordRaw> = [
     component: DigitalLiteracy,
     meta: {
       title: "Digital Literacy Criteria  | Our Net",
-      description: "Find out more about our Digital Literacy Partner - Digital Passport.",
+      description:
+        "Find out more about our Digital Literacy Partner - Digital Passport.",
     },
   },
   {

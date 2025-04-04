@@ -5,10 +5,11 @@
     <div class="max-w-screen-2xl w-full mx-auto px-4 sm:px-6">
       <div class="flex items-center py-4 md:space-x-10 h-20">
         <div class="inline-flex items-center">
-          
-          <img src="/images/retailer-logo.png" alt="Our Net Logo" class="h-8 w-auto" />
-        
-
+          <img
+            src="/images/retailer-logo.png"
+            alt="Our Net Logo"
+            class="h-8 w-auto"
+          />
         </div>
         <!-- <div class="flex-1 h-6">
 

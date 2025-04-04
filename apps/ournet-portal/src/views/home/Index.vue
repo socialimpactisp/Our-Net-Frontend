@@ -1,4 +1,3 @@
-
 <template>
   <div class="hero-container">
     <div class="hero-wrapper">
@@ -6,14 +5,18 @@
       <div class="hero-overlay"></div>
       <div class="hero-text animated-text">
         <div class="space-y-4">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-funnel font-bold text-brand-dark leading-tight tracking-tight">
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-funnel font-bold text-brand-dark leading-tight tracking-tight"
+          >
             <span class="block text-brand-red">Low Cost Fast Internet</span>
           </h1>
           <p class="text-brand-mid text-l max-w-2xl mx-auto font-sans">
             Affordable Pricing. Community Powered. Fast fibre internet.
           </p>
         </div>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
+        >
           <button
             @click="scrollToSection"
             class="px-8 py-3.5 bg-brand-red text-white rounded-lg font-sans text-[13px] tracking-wide font-medium hover:bg-brand-red/70 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-200"
@@ -26,107 +29,110 @@
   </div>
 
   <div
-          v-if="hasAccessCode || hasAccessCodeSelected"
-          class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
-        >
-          <div class="max-w-screen-2xl mx-auto relative">
-            <div class="lg:w-1/2 pl-6 pr-6 sm:pr-12">
-              <div class="max-w-xl">
-                <h3
-                  class="text-brand-dark text-xl sm:text-2xl flex items-start sm:items-center font-display tracking-tight"
-                />
-                <div class="mt-6 flex items-center">
-                  <address-search @selected="selectAddress" />
-                </div>
-              </div>
-            </div>
+    v-if="hasAccessCode || hasAccessCodeSelected"
+    class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
+  >
+    <div class="max-w-screen-2xl mx-auto relative">
+      <div class="lg:w-1/2 pl-6 pr-6 sm:pr-12">
+        <div class="max-w-xl">
+          <h3
+            class="text-brand-dark text-xl sm:text-2xl flex items-start sm:items-center font-display tracking-tight"
+          />
+          <div class="mt-6 flex items-center">
+            <address-search @selected="selectAddress" />
           </div>
         </div>
-        <div
-          v-else
-          class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
-        >
-          <div class="max-w-screen-2xl mx-auto relative">
-            <div class="lg:w-1/2 mx-auto px-6">
-              <div class="max-w-xl mx-auto">
-                <div class="flex items-center">
-                  <access-code-input
-                    @access-code="accessCodeEntered"
-                    class="w-full"
-                  />
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+  </div>
+  <div
+    v-else
+    class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
+  >
+    <div class="max-w-screen-2xl mx-auto relative">
+      <div class="lg:w-1/2 mx-auto px-6">
+        <div class="max-w-xl mx-auto">
+          <div class="flex items-center">
+            <access-code-input
+              @access-code="accessCodeEntered"
+              class="w-full"
+            />
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
-    <div
-      class="bg-white py-12 sm:py-20 relative overflow-hidden border-t border-brand-light/20"
-    >
-      <div class="max-w-screen-2xl mx-auto px-6 relative">
-        <div class="text-center space-y-4">
+  <div
+    class="bg-white py-12 sm:py-20 relative overflow-hidden border-t border-brand-light/20"
+  >
+    <div class="max-w-screen-2xl mx-auto px-6 relative">
+      <div class="text-center space-y-4">
         <span
           class="inline-block px-4 py-1.5 rounded-full bg-brand-red/10 text-brand-red text-[13px] font-sans font-medium tracking-wide"
         >
           Find a plan that suits your budget
         </span>
         <div id="get-started-section" class="mt-96 min-h-[50px]">
-          <h2 class="text-4xl sm:text-5xl text-brand-dark font-display font-bold tracking-tight">
+          <h2
+            class="text-4xl sm:text-5xl text-brand-dark font-display font-bold tracking-tight"
+          >
             Digital Equity Internet Plans
           </h2>
         </div>
         <p class="text-brand-mid text-lg max-w-2xl mx-auto font-sans">
-          Affordable fast internet plans for low income households, with no hidden fees and flexible payment options.
+          Affordable fast internet plans for low income households, with no
+          hidden fees and flexible payment options.
         </p>
       </div>
     </div>
   </div>
 
   <div class="relative bg-white py-16 border-t border-brand-light/20">
-      <div class="relative z-10 max-w-screen-2xl mx-auto">
-        <div class="relative">
-          <div
-            class="max-w-screen-xl mx-auto overflow-x-scroll sm:overflow-x-visible flex sm:grid sm:grid-cols-4 gap-6 px-4"
-            style="-webkit-overflow-scrolling: touch"
-          >
-            <template v-if="products === null">
-              <div class="w-full flex items-center justify-center py-12">
-                <loading-spinner />
-              </div>
-            </template>
-            <template v-else-if="products.plans.length > 0">
-              <template v-for="(product, index) in products.plans" :key="index">
-                <product-card
-                  :product-name="product.productName"
-                  :product-image="product.productImage"
-                  :speed-up="product.speeds.up"
-                  :speed-down="product.speeds.down"
-                  :price="product.price"
-                  :show-price="
-                    hasAccessCode || hasAccessCodeSelected ? true : false
-                  "
-                  :speed-equivocation="product.speedEquivocation"
-                />
-              </template>
-            </template>
-            <template v-else>
-              <div class="col-span-4 text-center py-12">
-                <p class="text-brand-mid text-lg">
-                  No products are available at the moment
-                </p>
-              </div>
-            </template>
-          </div>
-        </div>
+    <div class="relative z-10 max-w-screen-2xl mx-auto">
+      <div class="relative">
         <div
-          class="mt-6 flex sm:hidden items-center justify-center relative mx-6"
+          class="max-w-screen-xl mx-auto overflow-x-scroll sm:overflow-x-visible flex sm:grid sm:grid-cols-4 gap-6 px-4"
+          style="-webkit-overflow-scrolling: touch"
         >
-          <div class="w-32 h-1 bg-brand-light/30 rounded-full">
-            <div class="w-1/3 h-full bg-brand-red rounded-full"></div>
+          <template v-if="products === null">
+            <div class="w-full flex items-center justify-center py-12">
+              <loading-spinner />
             </div>
-          </div>
+          </template>
+          <template v-else-if="products.plans.length > 0">
+            <template v-for="(product, index) in products.plans" :key="index">
+              <product-card
+                :product-name="product.productName"
+                :product-image="product.productImage"
+                :speed-up="product.speeds.up"
+                :speed-down="product.speeds.down"
+                :price="product.price"
+                :show-price="
+                  hasAccessCode || hasAccessCodeSelected ? true : false
+                "
+                :speed-equivocation="product.speedEquivocation"
+              />
+            </template>
+          </template>
+          <template v-else>
+            <div class="col-span-4 text-center py-12">
+              <p class="text-brand-mid text-lg">
+                No products are available at the moment
+              </p>
+            </div>
+          </template>
         </div>
       </div>
+      <div
+        class="mt-6 flex sm:hidden items-center justify-center relative mx-6"
+      >
+        <div class="w-32 h-1 bg-brand-light/30 rounded-full">
+          <div class="w-1/3 h-full bg-brand-red rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -233,7 +239,7 @@ export default defineComponent({
         el.scrollIntoView({ behavior: "smooth" });
       } else {
         console.warn("Target element not found");
-      } 
+      }
     },
   },
 });
@@ -266,12 +272,16 @@ export default defineComponent({
   left: 0;
   height: 100%;
   width: 100%;
-  background: linear-gradient(to bottom right, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.9)
+  );
   z-index: 1;
 }
 
 .hero-wrapper:hover .hero-img {
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .hero-text {

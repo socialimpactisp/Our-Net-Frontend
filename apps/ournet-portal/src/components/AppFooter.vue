@@ -4,11 +4,16 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="col-span-2">
           <div class="flex items-center space-x-4">
-  <img src="/images/retailer-logo.png" alt="Our Net Logo" class="h-7 w-auto" />
-  
-</div>
+            <img
+              src="/images/retailer-logo.png"
+              alt="Our Net Logo"
+              class="h-7 w-auto"
+            />
+          </div>
           <p class="mt-5 text-[14px] font-sans text-brand-mid">
-            We are a socially conscious organisation, striving to create meaningful impact in Aotearoa New Zealand through the provision of affordable fast internet to low income households.
+            We are a socially conscious organisation, striving to create
+            meaningful impact in Aotearoa New Zealand through the provision of
+            affordable fast internet to low income households.
           </p>
         </div>
 
