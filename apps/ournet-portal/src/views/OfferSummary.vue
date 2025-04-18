@@ -4,8 +4,7 @@
       Our Net - Offer Summary
       <template #content>
         <p>
-          Find out everything you need to know about all of the plans we
-          currently offer.
+          Find out everything you need to know about the plans we currently offer.
         </p>
       </template>
     </UiBanner>

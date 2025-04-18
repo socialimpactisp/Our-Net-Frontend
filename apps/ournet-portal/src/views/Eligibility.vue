@@ -1,7 +1,7 @@
 <template>
   <div>
     <UiBanner>
-      Our Net - DE Household Elgibility Criteria.
+      Digital Equity Household Elgibility Criteria.
       <template #content>
         <p>
           If you have any further questions, please get in touch with our
