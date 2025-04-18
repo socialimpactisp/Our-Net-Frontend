@@ -27,6 +27,14 @@
 
       <app-nav-link
         tag="router-link"
+        to="/partners"
+        :active="$router.currentRoute.value.name === 'partners'"
+      >
+        Partners
+      </app-nav-link>
+
+      <app-nav-link
+        tag="router-link"
         to="/faq"
         :active="$router.currentRoute.value.name === 'faq'"
       >

@@ -1,7 +1,7 @@
 <template>
   <div>
     <UiBanner>
-      Our Net - Digital Literacy Commitment.
+      Digital Literacy Commitment.
       <template #content>
         <p>
           If you have any further questions, please get in touch with our

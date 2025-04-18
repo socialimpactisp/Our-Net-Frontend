@@ -7,6 +7,8 @@ const Home = () =>
 const FAQ = () => import(/* webpackChunkName: "home" */ "@/views/FAQ.vue");
 const DigitalLiteracy = () =>
   import(/* webpackChunkName: "home" */ "@/views/DigitalLiteracy.vue");
+const Partners = () =>
+  import(/* webpackChunkName: "home" */ "@/views/Partners.vue");
 const Eligibility = () =>
   import(/* webpackChunkName: "home" */ "@/views/Eligibility.vue");
 const PrivacyPolicy = () =>
@@ -62,6 +64,15 @@ const routes: Array<RouteRecordRaw> = [
       title: "Digital Literacy Criteria  | Our Net",
       description:
         "Find out more about our Digital Literacy Partner - Digital Passport.",
+    },
+  },
+  {
+    path: "/partners",
+    name: "partners",
+    component: Partners,
+    meta: {
+      title: "Community Partners  | Our Net",
+      description: "Find out more about the Community Partners we work with.",
     },
   },
   {
