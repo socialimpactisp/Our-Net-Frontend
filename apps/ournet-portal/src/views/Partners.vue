@@ -22,27 +22,26 @@
 
     <!-- ✅ Partner logos section -->
     <div class="max-w-screen-xl mx-auto px-6 py-12">
-      <h1 class="text-3xl font-bold mb-8"></h1>
-      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4 items-center">
-        <a
-          v-for="partner in partners"
-          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4 items-center">
-        </a>
-          :key="partner.name"
-          :href="partner.website"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block text-center hover:opacity-80 transition-opacity"
-        >
-          <img
-            :src="partners.logo"
-            :alt="partners.name"
-            class="h-22 w-auto mx-auto mb-2 object-contain"
-          />
-          <p class="text-sm text-brand-mid">{{ partners.name }}</p>
-        </a>
-      </div>
-    </div>
+  <h1 class="text-3xl font-bold mb-8">Our Community Partners</h1>
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4 items-center">
+    <a
+      v-for="partner in partners"
+      :key="partner.name"
+      :href="partner.website"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block text-center p-4 border rounded-lg shadow hover:opacity-90 transition-all bg-white"
+    >
+      <img
+        :src="partner.logo"
+        :alt="partner.name"
+        class="h-24 w-auto mx-auto mb-3 object-contain"
+      />
+      <p class="text-sm font-semibold text-brand-dark">{{ partner.name }}</p>
+      <p class="text-xs text-brand-mid whitespace-pre-line mt-1">{{ partner.description }}</p>
+    </a>
+  </div>
+</div>
 
     <!-- ✅ Accordion section -->
     <div class="bg-white py-12">
