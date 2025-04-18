@@ -3,8 +3,7 @@
     <UiBanner>
       Our Community Partners.
       <template #content>
-        <p>
-          The Community organisations that we proudly partner with.
+        <p>The Community organisations that we proudly partner with.
         </p>
         <p>
           <ui-button
@@ -27,6 +26,8 @@
       <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4 items-center">
         <a
           v-for="partner in partners"
+          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 gap-4 items-center">
+        </a>
           :key="partner.name"
           :href="partner.website"
           target="_blank"
@@ -34,11 +35,11 @@
           class="block text-center hover:opacity-80 transition-opacity"
         >
           <img
-            :src="partner.logo"
-            :alt="partner.name"
+            :src="partners.logo"
+            :alt="partners.name"
             class="h-22 w-auto mx-auto mb-2 object-contain"
           />
-          <p class="text-sm text-brand-mid">{{ partner.name }}</p>
+          <p class="text-sm text-brand-mid">{{ partners.name }}</p>
         </a>
       </div>
     </div>
@@ -59,7 +60,7 @@ import UiButton from "@/components/ui/Button.vue";
 import { UiBanner } from "@affinity/ui";
 
 export default defineComponent({
-  name: "Partners",
+  name: "CommunityPartners",
   components: {
     UiAccordion,
     UiButton,
