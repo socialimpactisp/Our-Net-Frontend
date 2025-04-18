@@ -72,8 +72,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Partners,
     meta: {
       title: "Community Partners  | Our Net",
-      description:
-        "Find out more about the Community Partners we work with.",
+      description: "Find out more about the Community Partners we work with.",
     },
   },
   {
