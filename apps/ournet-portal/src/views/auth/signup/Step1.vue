@@ -324,7 +324,7 @@ export default defineComponent({
         ReturnType<typeof getProductListFromApi>
       > | null,
       accessCode: undefined as AccessCode | undefined,
-      hasAccessCode: false,
+      hasAccessCode: true,
     };
   },
 

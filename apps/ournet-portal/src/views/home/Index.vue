@@ -33,10 +33,10 @@
     class="bg-white py-8 sm:py-12 relative overflow-hidden border-t border-brand-light/20"
   >
     <div class="max-w-screen-2xl mx-auto relative">
-      <div class="lg:w-1/2 pl-6 pr-6 sm:pr-12">
-        <div class="max-w-xl">
+      <div class="lg:w-1/2 mx-auto px-6">
+        <div class="max-w-xl mx-auto">
           <h3
-            class="text-brand-dark text-xl sm:text-2xl flex items-start sm:items-center font-display tracking-tight"
+            class="text-brand-dark text-xl sm:text-2xl font-display tracking-tight text-center"
           />
           <div class="mt-6 flex items-center">
             <address-search @selected="selectAddress" />
@@ -183,7 +183,7 @@ export default defineComponent({
       products: null as Awaited<
         ReturnType<typeof getProductListFromApi>
       > | null,
-      hasAccessCode: false,
+      hasAccessCode: true,
       accessCode: undefined as AccessCode | undefined,
     };
   },
