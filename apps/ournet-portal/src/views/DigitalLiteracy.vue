@@ -72,7 +72,7 @@ export default defineComponent({
           title:
             "Why have you partnered with Digital Passport?",
           value:
-            "We’ve partnered with Digital Passport because it works. Rather than reinvent the wheel, we're supporting a trusted resource that helps close the digital divide in Aotearoa. It's a practical, cost-effective way to support our customers—giving them the skills to make the most of their fast, affordable internet and feel more confident in their digital lives.",
+            "We've partnered with Digital Passport because it works. Rather than reinvent the wheel, we're supporting a trusted resource that helps close the digital divide in Aotearoa. It's a practical, cost-effective way to support our customers—giving them the skills to make the most of their fast, affordable internet and feel more confident in their digital lives.",
           category: "General",
         },
       ],
