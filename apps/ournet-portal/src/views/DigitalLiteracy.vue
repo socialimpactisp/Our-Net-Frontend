@@ -63,9 +63,16 @@ export default defineComponent({
         },
         {
           title:
-            "What is Digital Passport, and why have you partnered with them?",
+            "What is Digital Passport?",
           value:
-            "Digital Passport is a free online education platform developed by the Ministry of Social Development (MSD) in partnership with AcademyEX. It was designed to enhance digital skills and confidence among jobseekers. It offers self-paced learning modules that cover a range of digital competencies, from basic tasks like sending emails to more advanced skills involving the latest AI tools. As users progress through the three levels of training, they earn completion badges that can be added to their CVs, demonstrating their digital proficiency to potential employers.<br/><br/> Our Net has partnered with Digital Passport because we believe in leveraging existing, effective resources rather than reinventing the wheel. This collaboration is a cost-effective approach that aligns with our commitment to digital literacy and our mission to bridge the digital divide in New Zealand. By working together with like-minded organisations like Digital Passport, we can provide our customers with high-quality digital education, empowering them to fully utilise the fast, affordable internet services we offer and to participate more actively in today's digital society.",
+            "Digital Passport is a free online tool for anyone wanting to grow their digital skills and confidence. It's simple, flexible, and easy to follow, with lessons covering everything from sending an email to using the latest AI tools. Learners can progress at their own pace and earn badges to showcase their skills on their CVs. Developed by the Ministry of Social Development (MSD) in partnership with academyEX, it's designed to equip people with the skills they need to thrive in today's connected world.",
+          category: "General",
+        },
+        {
+          title:
+            "Why have you partnered with Digital Passport?",
+          value:
+            "We’ve partnered with Digital Passport because it works. Rather than reinvent the wheel, we're supporting a trusted resource that helps close the digital divide in Aotearoa. It's a practical, cost-effective way to support our customers—giving them the skills to make the most of their fast, affordable internet and feel more confident in their digital lives.",
           category: "General",
         },
       ],
