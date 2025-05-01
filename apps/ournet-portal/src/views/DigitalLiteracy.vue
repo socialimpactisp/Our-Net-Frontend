@@ -62,15 +62,13 @@ export default defineComponent({
           category: "General",
         },
         {
-          title:
-            "What is Digital Passport?",
+          title: "What is Digital Passport?",
           value:
             "Digital Passport is a free online tool for anyone wanting to grow their digital skills and confidence. It's simple, flexible, and easy to follow, with lessons covering everything from sending an email to using the latest AI tools. Learners can progress at their own pace and earn badges to showcase their skills on their CVs. Developed by the Ministry of Social Development (MSD) in partnership with academyEX, it's designed to equip people with the skills they need to thrive in today's connected world.",
           category: "General",
         },
         {
-          title:
-            "Why have you partnered with Digital Passport?",
+          title: "Why have you partnered with Digital Passport?",
           value:
             "We've partnered with Digital Passport because it works. Rather than reinvent the wheel, we're supporting a trusted resource that helps close the digital divide in Aotearoa. It's a practical, cost-effective way to support our customers—giving them the skills to make the most of their fast, affordable internet and feel more confident in their digital lives.",
           category: "General",
