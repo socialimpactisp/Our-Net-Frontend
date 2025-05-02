@@ -1,7 +1,7 @@
 <template>
   <div>
     <UiBanner>
-      Digital Equity Household Elgibility Criteria.
+      Digital Equity Household Eligibility Criteria.
       <template #content>
         <p>
           If you have any further questions, please get in touch with our

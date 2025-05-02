@@ -3,7 +3,7 @@
     <div class="relative bg-brand py-16">
       <div class="max-w-screen-2xl mx-auto text-white px-6">
         <h3 class="text-5xl text-center font-black tracking-tight">
-          Step into the Emporium
+          Our Net Products
         </h3>
         <div v-if="hasAccessCode || hasAccessCodeSelected">
           <div
