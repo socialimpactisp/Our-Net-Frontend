@@ -2,23 +2,29 @@ import { STRIPE_PRODUCTS } from "@/environment";
 import { LegacyPlan, getProducts } from "@affinity/common/api";
 import { client } from "./api";
 
-type ProductClass = "ufb" | "fwa" | "adsl" | "vdsl";
+type ProductClass = "ufb" | "fwa" | "adsl" | "vdsl" | "mobile";
 
+// Modem is handled separately
 type Modem = {
   productName: string;
   productClass: string;
   price: number;
+  stripeCode?: string;
+  productImage?: string;
+  description?: string;
 };
 
 type ApiProductMetadata = {
   average_download: string;
   average_upload: string;
-  product_class: ProductClass;
+  product_class: string;
   product_code: string;
 };
 
 type ApiProduct<M extends Record<string, string> = Record<string, string>> =
-  Awaited<ReturnType<typeof getProducts<M>>>[number];
+  Awaited<ReturnType<typeof getProducts<M>>>[number] & {
+    description?: string;
+  };
 
 // Define a more specific interface for the Stripe product with recurring info
 interface StripeProductWithRecurring {
@@ -33,6 +39,19 @@ interface StripeProductWithRecurring {
       interval_count: number;
     };
   };
+}
+
+// Type guard to check if a string is a valid ProductClass
+function isValidProductClass(
+  productClass: string,
+): productClass is ProductClass {
+  return (
+    productClass === "ufb" ||
+    productClass === "fwa" ||
+    productClass === "adsl" ||
+    productClass === "vdsl" ||
+    productClass === "mobile"
+  );
 }
 
 function isValidProduct(
@@ -60,9 +79,16 @@ function convertProductFromApiToPlan(
     interval = stripeProduct.default_price.recurring.interval;
   }
 
+  // Cast product_class to ensure it matches LegacyPlan requirements
+  const productClass = product.metadata.product_class;
+  // Ensure it's one of the valid ProductClass values from LegacyPlan
+  const validProductClass: ProductClass = isValidProductClass(productClass)
+    ? productClass
+    : "ufb"; // Default to ufb if invalid
+
   return {
     productName: product.name,
-    productClass: product.metadata.product_class,
+    productClass: validProductClass,
     productImage: product.images[0],
     stripeCode: product.id,
     price: product.default_price.unit_amount,
@@ -76,18 +102,45 @@ function convertProductFromApiToPlan(
   };
 }
 
+function convertProductFromApiToModem(product: ApiProduct): Modem {
+  return {
+    productName: product.name,
+    productClass: "modem",
+    price: product.default_price.unit_amount || 0,
+    stripeCode: product.id,
+    productImage:
+      product.images && product.images.length > 0
+        ? product.images[0]
+        : undefined,
+    description: product.description,
+  };
+}
+
 export async function getProductListFromApi() {
-  const plans = (await getProducts(client))
+  const products = await getProducts(client);
+
+  const plans = products
     .filter(isValidProduct)
     .map(convertProductFromApiToPlan);
 
-  const modems: Modem[] = [
-    {
+  // Using the product_code field to identify modems instead of product_class
+  const modems = products
+    .filter(
+      (product) =>
+        product.metadata && product.metadata.product_code === "modem",
+    )
+    .map(convertProductFromApiToModem);
+
+  // If no modems found in Stripe, fallback to the default one
+  if (modems.length === 0) {
+    modems.push({
       productName: "BYO Modem",
       productClass: "modem",
       price: 0,
-    },
-  ];
+      productImage: undefined,
+      description: "Bring your own compatible modem or router",
+    });
+  }
 
   return {
     plans,
@@ -203,6 +256,8 @@ const productList = (): { plans: LegacyPlan[]; modems: Modem[] } => {
           productName: "BYO Modem",
           productClass: "modem",
           price: 0,
+          productImage: undefined,
+          description: "Bring your own compatible modem or router",
         },
       ],
     };
@@ -311,6 +366,8 @@ const productList = (): { plans: LegacyPlan[]; modems: Modem[] } => {
           productName: "BYO Modem",
           productClass: "modem",
           price: 0,
+          productImage: undefined,
+          description: "Bring your own compatible modem or router",
         },
       ],
     };
