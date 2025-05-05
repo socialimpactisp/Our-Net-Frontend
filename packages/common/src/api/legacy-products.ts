@@ -10,5 +10,6 @@ export type LegacyPlan = {
     up: number;
   };
   speedEquivocation: string;
-  dataAllowance: number;
+  dataAllowance?: number;
+  interval?: string;
 };

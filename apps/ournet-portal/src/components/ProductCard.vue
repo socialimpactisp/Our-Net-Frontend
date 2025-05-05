@@ -27,7 +27,7 @@
         <span class="font-bold text-2xl leading-none">
           {{ getDollars(price) }}
         </span>
-        <span class="text-sm leading-none">/month</span>
+        <span class="text-sm leading-none">/{{ interval }}</span>
       </div>
     </div>
 
@@ -104,6 +104,10 @@ export default defineComponent({
     productImage: {
       type: String,
       default: "",
+    },
+    interval: {
+      type: String,
+      default: "month",
     },
   },
 

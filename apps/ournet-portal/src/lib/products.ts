@@ -17,8 +17,19 @@ type ApiProductMetadata = {
   product_code: string;
 };
 
+type Price = {
+  id: string;
+  unit_amount: number;
+  recurring?: {
+    interval: string;
+    interval_count: number;
+  };
+};
+
 type ApiProduct<M extends Record<string, string> = Record<string, string>> =
-  Awaited<ReturnType<typeof getProducts<M>>>[number];
+  Awaited<ReturnType<typeof getProducts<M>>>[number] & {
+    default_price: Price;
+  };
 
 function isValidProduct(
   product: ApiProduct,
@@ -36,6 +47,15 @@ function isValidProduct(
 function convertProductFromApiToPlan(
   product: ApiProduct<ApiProductMetadata>,
 ): LegacyPlan {
+  // Get interval from recurring if it exists
+  let interval = "month";
+
+  // Use any type to safely access the property that exists in the API but not in our types
+  const anyProduct = product as any;
+  if (anyProduct.default_price?.recurring?.interval) {
+    interval = anyProduct.default_price.recurring.interval;
+  }
+
   return {
     productName: product.name,
     productClass: product.metadata.product_class,
@@ -47,6 +67,8 @@ function convertProductFromApiToPlan(
       up: Number(product.metadata.average_upload),
     },
     speedEquivocation: "on average",
+    interval: interval,
+    dataAllowance: 0,
   };
 }
 

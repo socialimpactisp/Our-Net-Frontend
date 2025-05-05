@@ -99,6 +99,7 @@
                       :speed-equivocation="product.speedEquivocation"
                       :product-image="product.productImage"
                       :show-price="true"
+                      :interval="product.interval || 'month'"
                       @click="selectProduct(product)"
                     />
                   </template>
@@ -181,7 +182,9 @@
                         <span>
                           {{ getDollars(selected.product.price) }}
                         </span>
-                        <span class="text-xl"> /month </span>
+                        <span class="text-xl">
+                          /{{ selected.product.interval || "month" }}
+                        </span>
                       </h3>
                     </div>
                   </div>
@@ -279,6 +282,7 @@ interface Product {
   price: number;
   showPrice: boolean;
   speeds: ProductSpeeds;
+  interval?: string;
 }
 
 interface Modem {

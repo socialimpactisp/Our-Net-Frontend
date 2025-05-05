@@ -9,7 +9,7 @@ const meta = {
   component: AppFooter,
   tags: ["autodocs"],
   args: {
-    company: "Digital Emporium",
+    company: "Our Net",
     logo,
   },
 } satisfies Meta<typeof AppFooter>;
