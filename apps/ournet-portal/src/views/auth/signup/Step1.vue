@@ -120,17 +120,17 @@
               class="max-w-screen-lg mx-auto grid grid-flow-row sm:grid-flow-col auto-cols-fr gap-8"
             >
               <div v-for="(product, index) in products?.modems" :key="index">
-                <div v-if="product.price == 0">
+                <div>
                   <product-type-card
-                    title="I'll bring my own*"
-                    description="We ask that you bring your own modem / router; it might require a tiny bit of reconfiguration but nothing difficult and we can help if you get stuck."
+                    title="I'll bring my own"
+                    description="It might require a tiny bit of reconfiguration but nothing difficult and we can help if you get stuck."
                     :selected="
                       selected.modem?.productName === product.productName
                     "
                     @click="selectModem(product)"
                   />
                 </div>
-                <div v-else>
+                <div>
                   <product-type-card
                     title="I'd like a modem"
                     :description="`+${getDollars(product.price)}`"
