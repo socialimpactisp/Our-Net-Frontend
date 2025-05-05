@@ -117,30 +117,43 @@
               Select a modem
             </h3>
             <div
-              class="max-w-screen-lg mx-auto grid grid-flow-row sm:grid-flow-col auto-cols-fr gap-8"
+              class="max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"
             >
-              <div v-for="(product, index) in products?.modems" :key="index">
-                <div>
-                  <product-type-card
-                    title="I'll bring my own"
-                    description="It might require a tiny bit of reconfiguration but nothing difficult and we can help if you get stuck."
-                    :selected="
-                      selected.modem?.productName === product.productName
-                    "
-                    @click="selectModem(product)"
-                  />
-                </div>
-                <div>
+              <div>
+                <product-type-card
+                  title="I'll bring my own"
+                  description="It might require a tiny bit of reconfiguration but nothing difficult and we can help if you get stuck."
+                  :selected="selected.modem?.productName === 'bring-own'"
+                  @click="
+                    selectModem({
+                      productName: 'bring-own',
+                      productClass: 'modem',
+                      stripeCode: 'bring-own',
+                      price: 0,
+                    })
+                  "
+                />
+              </div>
+
+              <template v-if="products?.modems && products.modems.length > 0">
+                <div v-for="(modem, index) in products.modems" :key="index">
                   <product-type-card
                     title="I'd like a modem"
-                    :description="`+${getDollars(product.price)}`"
+                    :description="`+${getDollars(modem.price)}`"
                     :selected="
-                      selected.modem?.productName === product.productName
+                      selected.modem?.productName === modem.productName
                     "
-                    @click="selectModem(product)"
+                    @click="
+                      selectModem({
+                        productName: modem.productName,
+                        productClass: modem.productClass,
+                        stripeCode: 'modem',
+                        price: modem.price,
+                      })
+                    "
                   />
                 </div>
-              </div>
+              </template>
             </div>
             <p class="mt-4 max-w-xl mx-auto text-center text-gray-700">
               * If you really need a new one, then we can suggest some models to
@@ -259,6 +272,7 @@ interface AddressServices {
   fwa: boolean;
   vdsl: boolean;
   adsl: boolean;
+  mobile: boolean;
 }
 
 interface Transfer {
@@ -280,8 +294,9 @@ interface Product {
   productClass: string;
   stripeCode: string;
   price: number;
-  showPrice: boolean;
+  showPrice?: boolean;
   speeds: ProductSpeeds;
+  speedEquivocation: string;
   interval?: string;
 }
 
@@ -322,6 +337,7 @@ export default defineComponent({
         fwa: false,
         vdsl: false,
         adsl: false,
+        mobile: false,
       } as AddressServices,
       errors: null,
       products: null as Awaited<
@@ -439,21 +455,16 @@ export default defineComponent({
 
     selectProduct(product: Product) {
       if (this.selected) {
+        if (product.showPrice === undefined) {
+          product.showPrice = true;
+        }
         this.selected.product = product;
-
-        // Select default modem
-        // if (this.isDefaultModem) {
-        //   this.selected.modem = {
-        //     productName: this.products.modems[0]
-        //   }
-        // }
 
         localStorage.setItem("affinity_signup", JSON.stringify(this.selected));
       }
     },
 
     selectModem(modem: Modem) {
-      // this.isDefaultModem = false // Set default modem off
       if (this.selected) {
         this.selected.modem = modem;
 
@@ -469,6 +480,7 @@ export default defineComponent({
         fwa: false,
         vdsl: false,
         adsl: false,
+        mobile: false,
       };
       localStorage.removeItem("affinity_signup");
       search.focus();
