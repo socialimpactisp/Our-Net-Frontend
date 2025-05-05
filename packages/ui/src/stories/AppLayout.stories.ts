@@ -24,7 +24,7 @@ export const Default: Story = {
         <div>This is the content</div>
         
         <template #footer>
-          <AppFooter :inverted company="Digital Emporium" logo="${logo}"/>
+          <AppFooter :inverted company="Our Net" logo="${logo}"/>
         </template>
       </AppLayout>
     `,

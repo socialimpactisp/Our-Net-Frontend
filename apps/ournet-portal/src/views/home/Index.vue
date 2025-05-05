@@ -112,6 +112,7 @@
                   hasAccessCode || hasAccessCodeSelected ? true : false
                 "
                 :speed-equivocation="product.speedEquivocation"
+                :interval="product.interval || 'month'"
               />
             </template>
           </template>
