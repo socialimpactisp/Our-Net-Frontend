@@ -123,13 +123,15 @@
                 <product-type-card
                   title="I'll bring my own"
                   description="It might require a tiny bit of reconfiguration but nothing difficult and we can help if you get stuck."
-                  :selected="selected.modem?.productName === 'bring-own'"
+                  :selected="selected.modem?.productName === 'BYO Modem'"
                   @click="
                     selectModem({
-                      productName: 'bring-own',
+                      productName: 'BYO Modem',
                       productClass: 'modem',
                       stripeCode: 'bring-own',
                       price: 0,
+                      productImage: undefined,
+                      description: 'Bring your own compatible modem or router',
                     })
                   "
                 />
@@ -139,7 +141,14 @@
                 <div v-for="(modem, index) in products.modems" :key="index">
                   <product-type-card
                     title="I'd like a modem"
-                    :description="`+${getDollars(modem.price)}`"
+                    :description="
+                      modem.description
+                        ? modem.description +
+                          (modem.price > 0
+                            ? `\n${getDollars(modem.price)}`
+                            : '')
+                        : `+${getDollars(modem.price)}`
+                    "
                     :selected="
                       selected.modem?.productName === modem.productName
                     "
@@ -147,18 +156,16 @@
                       selectModem({
                         productName: modem.productName,
                         productClass: modem.productClass,
-                        stripeCode: 'modem',
+                        stripeCode: modem.stripeCode || 'modem',
                         price: modem.price,
+                        productImage: modem.productImage,
+                        description: modem.description,
                       })
                     "
                   />
                 </div>
               </template>
             </div>
-            <p class="mt-4 max-w-xl mx-auto text-center text-gray-700">
-              * If you really need a new one, then we can suggest some models to
-              you.
-            </p>
           </div>
           <div v-if="selected.modem" class="py-12 px-6 border-b-2 bg-brand">
             <div class="max-w-screen-lg mx-auto text-black">
@@ -305,6 +312,8 @@ interface Modem {
   productClass: string;
   stripeCode: string;
   price: number;
+  productImage?: string;
+  description?: string;
 }
 
 interface SelectedAddress {
