@@ -17,19 +17,23 @@ type ApiProductMetadata = {
   product_code: string;
 };
 
-type Price = {
-  id: string;
-  unit_amount: number;
-  recurring?: {
-    interval: string;
-    interval_count: number;
-  };
-};
-
 type ApiProduct<M extends Record<string, string> = Record<string, string>> =
-  Awaited<ReturnType<typeof getProducts<M>>>[number] & {
-    default_price: Price;
+  Awaited<ReturnType<typeof getProducts<M>>>[number];
+
+// Define a more specific interface for the Stripe product with recurring info
+interface StripeProductWithRecurring {
+  name: string;
+  id: string;
+  metadata: ApiProductMetadata;
+  images: string[];
+  default_price: {
+    unit_amount: number;
+    recurring?: {
+      interval: string;
+      interval_count: number;
+    };
   };
+}
 
 function isValidProduct(
   product: ApiProduct,
@@ -50,10 +54,10 @@ function convertProductFromApiToPlan(
   // Get interval from recurring if it exists
   let interval = "month";
 
-  // Use any type to safely access the property that exists in the API but not in our types
-  const anyProduct = product as any;
-  if (anyProduct.default_price?.recurring?.interval) {
-    interval = anyProduct.default_price.recurring.interval;
+  // Cast to the more specific type that includes recurring information
+  const stripeProduct = product as StripeProductWithRecurring;
+  if (stripeProduct.default_price?.recurring?.interval) {
+    interval = stripeProduct.default_price.recurring.interval;
   }
 
   return {
