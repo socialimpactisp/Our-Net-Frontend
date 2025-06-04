@@ -238,14 +238,6 @@
           <a href="/customer-complaints">complaints process</a>.
         </td>
       </tr>
-      <tr>
-        <th scope="row">Disputes</th>
-        <td>
-          Devoli Limited is a member of the Telecommunications Disputes
-          Resolution (TDR) Scheme. You can find information about the TDRS on
-          our <a href="/customer-complaints#disputes">complaints page</a>.
-        </td>
-      </tr>
     </tbody>
   </table>
 </template>
