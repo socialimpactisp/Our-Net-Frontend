@@ -22,7 +22,7 @@
         <template v-else>
           <offer-summary-table
             isp-name="Our Net"
-            parent-company="Social Impact Digital Equity Tapui Ltd - trading as Our Net (a subsidiary of Devoli Ltd)"
+            parent-company="Social Impact Digital Equity Tapui Ltd - trading as Our Net"
             :plans="plans"
           />
         </template>
