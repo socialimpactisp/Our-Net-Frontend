@@ -10,8 +10,7 @@
       <tr>
         <th scope="row">Service Description</th>
         <td>
-          Broadband service for friends &amp; family of {{ parentCompany }}. You
-          need an invite-code to join.
+          Broadband services provided by Social Impact Digital Equity Tapui Ltd - trading as Our Net.
         </td>
       </tr>
       <tr>
