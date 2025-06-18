@@ -18,7 +18,7 @@
       <div class="mb-4">
         <h2 class="text-md font-medium mb-4">Add Payment Method</h2>
         <p class="text-gray-600 text-sm">
-          Add a payment method to your OurNet account.
+          Add a payment method to your Our Net account.
         </p>
       </div>
 

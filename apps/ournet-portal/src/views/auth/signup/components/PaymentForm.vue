@@ -96,7 +96,7 @@
     </div>
     <div class="mt-4 text-center">
       <p class="font-bold text-sm text-gray-500">
-        OurNet payments are secured by
+        Our Net payments are secured by
         <a
           class="underline"
           href="https://stripe.com"
