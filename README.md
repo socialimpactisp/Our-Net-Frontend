@@ -1,8 +1,8 @@
-# OurNet ESP Platform
+# Our Net ESP Platform
 
 A modern Education Service Provider (ESP) and ISP customer portal built with Vue 3, TypeScript, and Tailwind CSS. This platform supports OurNet's mission to bridge the digital divide by providing both connectivity and educational opportunities to Māori communities.
 
-## About OurNet
+## About Our Net
 
 OurNet is pioneering the transition from a traditional Internet Service Provider (ISP) to an Education Service Provider (ESP), offering "education-led connectivity" that empowers whānau with the tools, skills, and knowledge to thrive in the digital world. Our platform integrates:
 
