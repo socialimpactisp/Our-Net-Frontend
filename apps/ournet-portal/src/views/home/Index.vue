@@ -217,7 +217,7 @@ export default defineComponent({
 
     loadProducts() {
       getProductListFromApi().then((products) => {
-        products.plans.sort((a, b) => a.price - b.price);
+        products.plans.sort((a, b) => a.price - b.price); // ascending order
         this.products = products;
       });
     },
