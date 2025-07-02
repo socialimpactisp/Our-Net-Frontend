@@ -216,7 +216,10 @@ export default defineComponent({
     },
 
     loadProducts() {
-      getProductListFromApi().then((products) => (this.products = products));
+      getProductListFromApi().then((products) => {
+        products.plans.sort((a, b) => a.price - b.price);
+        this.products = products;
+      });
     },
 
     getAccessCode() {
