@@ -54,14 +54,16 @@ export default defineComponent({
             "What are your eligibility criteria for DE (Digital Equity) customer households?",
           value: `To be considered as a DE customer household, you must meet the following THREE criteria (1, 2 & 3):
           <ul class="block list-disc mt-4 pl-4 space-y-2">
-            <ol>1. You have a current COMMUNITY SERVICES CARD - the homeowner, or the person who is on the rental lease for your home, is the person that must provide proof that they have a current community services card. We do accept the SuperGold card, too.</ol>
+            <ol>1. You must NOT have a current fibre internet connection for at least 3 months.</ol>
             <ol>2. You must have an ONT installed in your home - ONT stands for 'Optical Network Terminal' and is sometimes called a 'Fibre Box'. This is the little box that brings fibre internet into your home. If you are unsure whether or not you have an ONT in your home, we can normally check this for you from our side. The ONT allows you to receive our fast fibre internet services. The Wi-Fi router is connected to the ONT.</ol>
-            <ol>3. You must NOT have been a customer with any other ISP after November 2024.</ol>
+            <ol>3. You have a current COMMUNITY SERVICES CARD - the homeowner, or the person who is on the rental lease for your home, is the person that must provide proof that they have a current community services card. We do accept the SuperGold card as long as this is combined with a Community Services Card.</ol>
+            <ol> Note: Proof of income status can be provided by providing Community Services Card or  or evidence of MyMSD Benefit Breakdown letter.</ol>
+
             
             <br>And also ONE criteria from the following:</br>
             
-            <ol>4. Your are a SOCIAL HOUSING tenant with Kāinga Ora, Tāmaki Regeneration or another subsidised-rent Community Housing Provider. If you are a tenant in a Community Housing provider you must be able to provide evidence of a tenancy agreement.</ol>
-            <ol>5. You have child/ren in your household who attend a SCHOOL that is part of the Ministry of Education Ka Ora, Ka Ako, Healthy School Lunches Programme.</ol>         
+            <ol>4. You are a PUBLIC or SOCIAL HOUSING tenant, for example Kāinga Ora or another subsidised-rent Social or Community Housing Provider. If you are a tenant in a Community Housing provider you must be able to provide evidence of a tenancy agreement.</ol>
+            <ol>5. You have child/ren in your household who attend a SCHOOL that has an Equity Indexof 490+ (formerly known as low decile).</ol>         
           </ul>
           `,
           category: "General",
