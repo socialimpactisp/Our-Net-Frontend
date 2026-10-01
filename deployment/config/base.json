@@ -1,0 +1,30 @@
+{
+  "project": {
+    "name": "ournet",
+    "bucketName": "ournet-websites-704403761519",
+    "bucketStackName": "ournet-website-bucket"
+  },
+  "aws": {
+    "region": "ap-southeast-2"
+  },
+  "cloudfront": {
+    "priceClass": "PRICE_CLASS_ALL",
+    "cacheTtl": {
+      "default": 60,
+      "min": 60,
+      "max": 60
+    },
+    "errorPages": [
+      {
+        "httpStatus": 404,
+        "responseHttpStatus": 200,
+        "responsePagePath": "/index.html"
+      },
+      {
+        "httpStatus": 403,
+        "responseHttpStatus": 200,
+        "responsePagePath": "/index.html"
+      }
+    ]
+  }
+}

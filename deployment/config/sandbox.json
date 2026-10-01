@@ -1,0 +1,12 @@
+{
+  "environment": "sandbox",
+  "sites": [
+    {
+      "stackName": "ournet-sandbox-website",
+      "siteDnsAliases": [
+        "sandbox.our.net.nz"
+      ],
+      "s3Path": "/sandbox/"
+    }
+  ]
+}
