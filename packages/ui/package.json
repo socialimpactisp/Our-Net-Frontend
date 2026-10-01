@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@affinity/common": "*",
-    "vue": "^3.3.7"
+    "vue": "^3.5.43"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.1",
@@ -43,11 +43,11 @@
     "@storybook/vue3-vite": "^7.4.1",
     "@typescript-eslint/parser": "^6.7.0",
     "@vitejs/plugin-vue": "^4.2.3",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.6.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-storybook": "^0.6.15",
     "postcss": "^8.4.39",
-    "prettier": "^3.0.3",
+    "prettier": "^3.9.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.4.1",
