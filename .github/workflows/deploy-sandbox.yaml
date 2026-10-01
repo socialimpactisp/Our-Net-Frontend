@@ -1,0 +1,66 @@
+name: Deploy Our Net Sandbox
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ournet-sandbox-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.SANDBOX_DEPLOYMENT_ENABLED == 'true' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: Ournet Sandbox
+      url: https://sandbox.our.net.nz
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AWS_REGION: ap-southeast-2
+      S3_BUCKET: ournet-websites-704403761519
+      DISTRIBUTION_ID: ${{ vars.SANDBOX_DISTRIBUTION_ID }}
+      ROLE_ARN: ${{ vars.AWS_SANDBOX_ROLE_ARN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check reviewed deployment settings
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$ROLE_ARN" == arn:aws:iam::704403761519:role/* ]]
+          [[ "$DISTRIBUTION_ID" =~ ^[A-Z0-9]+$ ]]
+      - name: Use existing application build setup
+        uses: ./.github/actions/node
+      - name: Build existing frontend for Sandbox
+        run: npm run -w social-impact-isp build -- --mode=sandbox
+      - name: Verify build output
+        run: test -s apps/ournet-portal/dist/index.html
+      - name: Authenticate with temporary AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          allowed-account-ids: '704403761519'
+          role-session-name: OurNetSandbox-${{ github.run_id }}
+      - name: Verify AWS account and Sandbox distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(aws sts get-caller-identity --query Account --output text)" = "704403761519"
+          aws cloudfront get-distribution-config --id "$DISTRIBUTION_ID" > "$RUNNER_TEMP/distribution.json"
+          jq -e --arg origin "$S3_BUCKET.s3.$AWS_REGION.amazonaws.com" '
+            .DistributionConfig as $d |
+            ($d.Aliases.Items == ["sandbox.our.net.nz"]) and
+            ($d.Origins.Items | length == 1) and
+            ($d.Origins.Items[0].DomainName == $origin) and
+            ($d.Origins.Items[0].OriginPath == "/sandbox")
+          ' "$RUNNER_TEMP/distribution.json"
+      - name: Upload Sandbox files only
+        run: aws s3 sync apps/ournet-portal/dist/ "s3://$S3_BUCKET/sandbox/" --delete
+      - name: Refresh Sandbox cache
+        run: aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*"

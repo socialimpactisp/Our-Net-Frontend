@@ -1,0 +1,24 @@
+{
+  "name": "deployment",
+  "version": "0.1.0",
+  "bin": {
+    "deployment": "bin/deployment.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "aws-cdk": "^2.170.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.2"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.170.0",
+    "constructs": "^10.4.2",
+    "dotenv": "^17.2.1",
+    "source-map-support": "^0.5.21"
+  }
+}
