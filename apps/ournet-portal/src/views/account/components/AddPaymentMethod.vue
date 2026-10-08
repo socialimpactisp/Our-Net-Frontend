@@ -73,9 +73,10 @@ interface CreateIntent {
 
 // eslint-disable-next-line no-undef
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const stripe = (window as any).Stripe(STRIPE_KEY, {
-  stripeAccount: STRIPE_ACCOUNT,
-});
+const stripe = (window as any).Stripe(
+  STRIPE_KEY,
+  STRIPE_ACCOUNT ? { stripeAccount: STRIPE_ACCOUNT } : undefined,
+);
 const elements = stripe.elements();
 let cardElement: { mount: (arg0: unknown) => void } | null = null;
 
