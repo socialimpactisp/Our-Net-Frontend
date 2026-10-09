@@ -1,0 +1,74 @@
+name: Deploy Our Net Production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ournet-production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.PRODUCTION_DEPLOYMENT_ENABLED == 'true' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: Ournet Production
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AWS_REGION: ap-southeast-2
+      S3_BUCKET: ournet-websites-704403761519
+      DISTRIBUTION_ID: ${{ vars.PRODUCTION_DISTRIBUTION_ID }}
+      ROLE_ARN: ${{ vars.AWS_PRODUCTION_ROLE_ARN }}
+      CERTIFICATE_ARN: ${{ vars.PRODUCTION_PREVIEW_CERTIFICATE_ARN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check reviewed production destination
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$ROLE_ARN" = "arn:aws:iam::704403761519:role/OurNetProductionGitHubDeployer"
+          [[ "$DISTRIBUTION_ID" =~ ^[A-Z0-9]+$ ]]
+          test "$DISTRIBUTION_ID" != "E3VE3MLP8T8RWU"
+      - name: Use existing application build setup
+        uses: ./.github/actions/node
+      - name: Build existing frontend for Production
+        run: npm run -w social-impact-isp build -- --mode=production
+      - name: Verify build output
+        run: test -s apps/ournet-portal/dist/index.html
+      - name: Authenticate with temporary AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          allowed-account-ids: '704403761519'
+          role-session-name: OurNetProduction-${{ github.run_id }}
+      - name: Verify account and production distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(aws sts get-caller-identity --query Account --output text)" = "704403761519"
+          aws cloudfront get-distribution --id "$DISTRIBUTION_ID" > "$RUNNER_TEMP/distribution.json"
+          jq -e --arg certificate "$CERTIFICATE_ARN" --arg origin "$S3_BUCKET.s3.$AWS_REGION.amazonaws.com" '
+            .Distribution as $distribution |
+            $distribution.DistributionConfig as $d |
+            ($distribution.Status == "Deployed") and
+            ($d.Enabled == true) and
+            ($d.Comment == "Our Net production frontend") and
+            (($d.Aliases.Items // []) as $aliases |
+              ($aliases == ["www-new.our.net.nz"])) and
+            ($d.Origins.Items | length == 1) and
+            ($d.Origins.Items[0].DomainName == $origin) and
+            ($d.Origins.Items[0].OriginPath == "/production") and
+            ($d.ViewerCertificate.ACMCertificateArn ==
+              $certificate)
+          ' "$RUNNER_TEMP/distribution.json"
+      - name: Upload production prefix only
+        run: aws s3 sync apps/ournet-portal/dist/ "s3://$S3_BUCKET/production/" --delete
+      - name: Refresh production cache
+        run: aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*"
