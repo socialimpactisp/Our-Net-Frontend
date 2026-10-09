@@ -6,10 +6,16 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import { StaticSiteBucketStack } from '../lib/bucketStack';
 
 // Separate entry point: the existing Sandbox app and config stay unchanged.
-// No custom domain is claimed here. Domain transfer is a separate reviewed change.
+// Preview only. Live domain transfer requires a separate reviewed change.
 const account = '704403761519';
 const region = 'ap-southeast-2';
-const certificateArn = 'arn:aws:acm:us-east-1:704403761519:certificate/0ac9457d-a3b9-4120-b52c-72f968bcb25e';
+const certificateArn = process.env.PRODUCTION_PREVIEW_CERTIFICATE_ARN;
+if (!certificateArn || !/^arn:aws:acm:us-east-1:704403761519:certificate\/[0-9a-f-]{36}$/.test(certificateArn)) {
+  throw new Error('Provide the reviewed, issued preview certificate ARN in us-east-1.');
+}
+if (certificateArn.endsWith('/0ac9457d-a3b9-4120-b52c-72f968bcb25e')) {
+  throw new Error('The existing certificate does not cover the preview hostname.');
+}
 if (process.env.AWS_ACCOUNT_ID !== account || process.env.AWS_REGION !== region) {
   throw new Error('Set the reviewed AWS_ACCOUNT_ID and AWS_REGION before production preparation.');
 }
@@ -23,7 +29,7 @@ const bucket = new StaticSiteBucketStack(app, 'ournet-website-bucket', 'ournet-w
 const site = new cdk.Stack(app, 'ournet-production-website', { env });
 const distribution = new cloudfront.Distribution(site, 'ProductionDistribution', {
   comment: 'Our Net production frontend',
-  domainNames: [],
+  domainNames: ['www-new.our.net.nz'],
   certificate: acm.Certificate.fromCertificateArn(site, 'ProductionCertificate', certificateArn),
   sslSupportMethod: cloudfront.SSLMethod.SNI,
   minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
