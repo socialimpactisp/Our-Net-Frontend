@@ -29,3 +29,9 @@ Live cutover requires a separate reviewed change and explicit approval. Capture 
 DNS rollback alone may not restore a site after a distribution alias transfer. Agree the reversal procedure and hosting overlap before cutover. Preserve unrelated DNS records and validate both live domains after the approved transfer.
 
 The detailed operational checkpoint is maintained locally and is not part of this public repository.
+
+## Existing domain associations
+
+Do not deploy live mode to attach names that another distribution still owns. Complete the explicitly approved, AWS-supported association move first; that move can change traffic routing even before DNS changes. Then reconcile the CloudFormation template and upload mode to the actual alias set using a reviewed change set, preserving the distribution identity and shared resources. Stop for replacement or deletion.
+
+For an enabled cross-account source with an apex domain, prepare the AWS Support-assisted procedure and domain-ownership TXT records. A support inquiry must request preparation only until an execution window is explicitly approved. Agree the reverse-association process and operator availability before cutover; keeping the old content online does not alone make DNS rollback sufficient.
