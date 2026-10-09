@@ -4,7 +4,7 @@ This change prepares separate preview hosting. It does not deploy resources, ena
 
 ## Preview configuration
 
-The infrastructure declares only the preview hostname. Set PRODUCTION_PREVIEW_CERTIFICATE_ARN to an independently verified, issued certificate that covers that hostname. The same value is required by the upload workflow. Do not reuse a certificate without preview coverage.
+The infrastructure defaults to only the preview hostname. PRODUCTION_DOMAIN_MODE accepts preview (default) or live; any other value fails. Live mode retains the preview hostname and adds both live names. Set the same mode in the Ournet Production environment for upload verification. Keep it at preview until an explicitly approved cutover; changing infrastructure aliases can affect routing even before DNS is changed. Set PRODUCTION_PREVIEW_CERTIFICATE_ARN to an independently verified, issued certificate that covers that hostname. The same value is required by the upload workflow. Do not reuse a certificate without preview coverage.
 
 The workflow is manual, main-only and requires PRODUCTION_DEPLOYMENT_ENABLED. It verifies the intended distribution, alias, certificate and origin before uploading. Leave deployment disabled until the reviewed change is approved.
 
