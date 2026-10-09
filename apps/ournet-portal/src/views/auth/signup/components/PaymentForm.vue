@@ -336,7 +336,7 @@ export default defineComponent({
         })
         .then((res) => {
           this.disablePaymentForm = false;
-          if (res.status === 200) {
+          if (res.status === 200 || res.status === 201) {
             // this.$router.push('/success') // Push user to success page.
             this.$emit("confirmed", this.priceIds); // Trigger confirmed event
           }
