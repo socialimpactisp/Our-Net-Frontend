@@ -25,6 +25,7 @@ jobs:
       S3_BUCKET: ournet-websites-704403761519
       DISTRIBUTION_ID: ${{ vars.PRODUCTION_DISTRIBUTION_ID }}
       ROLE_ARN: ${{ vars.AWS_PRODUCTION_ROLE_ARN }}
+      DOMAIN_MODE: ${{ vars.PRODUCTION_DOMAIN_MODE || 'preview' }}
       CERTIFICATE_ARN: ${{ vars.PRODUCTION_PREVIEW_CERTIFICATE_ARN }}
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +36,7 @@ jobs:
           test "$ROLE_ARN" = "arn:aws:iam::704403761519:role/OurNetProductionGitHubDeployer"
           [[ "$DISTRIBUTION_ID" =~ ^[A-Z0-9]+$ ]]
           test "$DISTRIBUTION_ID" != "E3VE3MLP8T8RWU"
+          [[ "$DOMAIN_MODE" == "preview" || "$DOMAIN_MODE" == "live" ]]
       - name: Use existing application build setup
         uses: ./.github/actions/node
       - name: Build existing frontend for Production
@@ -54,14 +56,16 @@ jobs:
           set -euo pipefail
           test "$(aws sts get-caller-identity --query Account --output text)" = "704403761519"
           aws cloudfront get-distribution --id "$DISTRIBUTION_ID" > "$RUNNER_TEMP/distribution.json"
-          jq -e --arg certificate "$CERTIFICATE_ARN" --arg origin "$S3_BUCKET.s3.$AWS_REGION.amazonaws.com" '
+          jq -e --arg mode "$DOMAIN_MODE" --arg certificate "$CERTIFICATE_ARN" --arg origin "$S3_BUCKET.s3.$AWS_REGION.amazonaws.com" '
             .Distribution as $distribution |
             $distribution.DistributionConfig as $d |
             ($distribution.Status == "Deployed") and
             ($d.Enabled == true) and
             ($d.Comment == "Our Net production frontend") and
             (($d.Aliases.Items // []) as $aliases |
-              ($aliases == ["www-new.our.net.nz"])) and
+              (($aliases | sort) == (if $mode == "live" then
+                ["our.net.nz", "www-new.our.net.nz", "www.our.net.nz"]
+              else ["www-new.our.net.nz"] end))) and
             ($d.Origins.Items | length == 1) and
             ($d.Origins.Items[0].DomainName == $origin) and
             ($d.Origins.Items[0].OriginPath == "/production") and
