@@ -6,7 +6,14 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import { StaticSiteBucketStack } from '../lib/bucketStack';
 
 // Separate entry point: the existing Sandbox app and config stay unchanged.
-// Preview only. Live domain transfer requires a separate reviewed change.
+// Default to preview. Apply live mode only during an explicitly approved cutover.
+const domainMode = process.env.PRODUCTION_DOMAIN_MODE || 'preview';
+if (!['preview', 'live'].includes(domainMode)) {
+  throw new Error('PRODUCTION_DOMAIN_MODE must be preview or live.');
+}
+const domainNames = domainMode === 'live'
+  ? ['our.net.nz', 'www.our.net.nz', 'www-new.our.net.nz']
+  : ['www-new.our.net.nz'];
 const account = '704403761519';
 const region = 'ap-southeast-2';
 const certificateArn = process.env.PRODUCTION_PREVIEW_CERTIFICATE_ARN;
@@ -29,7 +36,7 @@ const bucket = new StaticSiteBucketStack(app, 'ournet-website-bucket', 'ournet-w
 const site = new cdk.Stack(app, 'ournet-production-website', { env });
 const distribution = new cloudfront.Distribution(site, 'ProductionDistribution', {
   comment: 'Our Net production frontend',
-  domainNames: ['www-new.our.net.nz'],
+  domainNames,
   certificate: acm.Certificate.fromCertificateArn(site, 'ProductionCertificate', certificateArn),
   sslSupportMethod: cloudfront.SSLMethod.SNI,
   minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
