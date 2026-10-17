@@ -4,11 +4,11 @@
       <div class="max-w-screen-2xl mx-auto px-6">
         <div class="max-w-xl mx-auto text-white">
           <h1 class="text-5xl font-black tracking-tight">
-            Thank you for connecting!
+            Thank you for registering!
           </h1>
           <p class="mt-4 text-xl font-medium text-gray-200">
-            We appreciate you choosing Our Net as your broadband provider - your
-            payment has been received.
+            Your registration has been received. We'll be in touch about the next
+            steps.
           </p>
         </div>
       </div>
