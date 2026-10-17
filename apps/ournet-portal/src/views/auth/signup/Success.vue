@@ -11,7 +11,8 @@
             steps.
           </p>
           <p class="mt-4 text-xl font-medium text-gray-200">
-            No payment has been charged as part of this registration.
+            No payment is charged when your card details are saved. Any applicable
+            plan or modem charges follow the terms shown during registration.
           </p>
         </div>
       </div>
