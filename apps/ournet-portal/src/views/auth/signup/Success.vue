@@ -10,6 +10,9 @@
             Your registration has been received. We'll be in touch about the next
             steps.
           </p>
+          <p class="mt-4 text-xl font-medium text-gray-200">
+            No payment has been charged as part of this registration.
+          </p>
         </div>
       </div>
     </div>
