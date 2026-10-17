@@ -14,6 +14,9 @@
             No payment is charged when your card details are saved. Any applicable
             plan or modem charges follow the terms shown during registration.
           </p>
+          <p class="mt-4 text-xl font-medium text-gray-200">
+            Eligible Digital Equity whānau receive a modem at no charge.
+          </p>
         </div>
       </div>
     </div>
